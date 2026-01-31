@@ -407,6 +407,39 @@
             animation: fadeOut 3s forwards;
         }
         
+        /* Updated: Vertical Stack for Stamp and Signature */
+        .signature-stamp-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            margin-top: 30px;
+        }
+        
+        .stamp-image {
+            width: 180px;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+            margin-top: -10px;
+            z-index: 1;
+        }
+        
+        .signature-image {
+            width: 150px;
+            height: auto;
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+            z-index: 2;
+            position: relative;
+            margin-bottom: -20px;
+        }
+        
+        .authorized-signatory {
+            font-size: 12px;
+            color: #555;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
         .invoice-container {
             max-width: 900px;
             margin: 30px auto;
@@ -634,6 +667,14 @@
             
             .invoice-content-wrapper {
                 min-height: 600px;
+            }
+            
+            .stamp-image {
+                width: 150px;
+            }
+            
+            .signature-image {
+                width: 120px;
             }
         }
     </style>
@@ -922,17 +963,10 @@
                     THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>
                     FALL OF MARKET PRICES FROM DATE OF ISSUE.
                 </div>
-                <div class="signature-box" style="margin-top: 30px;">
-                    <div class="editable" data-id="signature-image" style="display: inline-block;">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Ctext x='10' y='25' font-family='Arial' font-size='12' fill='%231e3a5f' font-style='italic'%3EOGI%3C/text%3E%3C/svg%3E" alt="Signature" style="width: 80px; margin: 10px 0;">
-                    </div>
-                    <div class="editable" data-id="signatory-text" style="margin-top: 5px;">
-                        Opulence Group Indonesia
-                    </div>
-                    <div class="editable" data-id="signatory-text" style="margin-top: 2px; font-size: 10px;">
-                        Authorized Signatory
-                    </div>
-                </div>
+                
+                <!-- NOTE section में Signature और Stamp REMOVED -->
+                <!-- Now ONLY Authorised Signatory section में Signature और Stamp होंगे -->
+                
             </div>
             
             <table class="summary-table">
@@ -977,6 +1011,30 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        
+        <!-- NEW: Separate Authorised Signatory Section with Stamp and Signature -->
+        <div class="signature-stamp-container" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #1e3a5f;">
+            <!-- 1. SIGNATURE (TOP) -->
+            <div class="editable" data-id="signature-image-po" style="display: inline-block; z-index: 2;">
+                <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
+                     alt="Authorized Signature" 
+                     class="signature-image">
+            </div>
+            
+            <!-- 2. STAMP (MIDDLE - under Signature) -->
+            <div class="editable" data-id="stamp-image-po" style="display: inline-block; z-index: 1; margin-top: -30px;">
+                <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
+                     alt="Company Stamp" 
+                     class="stamp-image">
+            </div>
+            
+            <!-- 3. AUTHORIZED SIGNATORY TEXT (BOTTOM) -->
+            <div class="editable" data-id="signatory-text-po" style="margin-top: 10px; text-align: center;">
+                <div class="authorized-signatory">Aiman Akhtar</div>
+                <div style="font-size: 11px; color: #555; margin-top: 5px;">Authorized Signatory</div>
+                <div style="font-size: 10px; color: #777; margin-top: 2px;">Opulence Group Indonesia</div>
+            </div>
         </div>
     </div>
 
@@ -1057,14 +1115,33 @@
                 </ol>
             </div>
 
+            <!-- UPDATED: Signature and Stamp in Separate Authorised Signatory Section -->
             <div class="invoice-signature-section">
                 <div class="invoice-signature-box">
-                    <div class="invoice-signature-line"></div>
+                    <!-- 1. SIGNATURE (TOP) -->
+                    <div class="editable" data-id="signature-image-invoice" style="text-align: center; margin-bottom: -25px; z-index: 2;">
+                        <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
+                             alt="Authorized Signature" 
+                             style="width: 150px; height: auto; filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));">
+                    </div>
+                    
+                    <!-- 2. STAMP (MIDDLE - under Signature) -->
+                    <div class="editable" data-id="stamp-image-invoice" style="text-align: center; z-index: 1;">
+                        <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
+                             alt="Company Stamp" 
+                             style="width: 180px; height: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2)); margin-top: -30px;">
+                    </div>
+                    
+                    <!-- 3. SIGNATURE LINE AND TEXT (BOTTOM) -->
+                    <div class="invoice-signature-line" style="margin-top: 10px;"></div>
                     <div class="invoice-signature-text editable" data-id="invoice-signature-text">
-                        OPULENCE GROUP INDONESIA
+                        Aiman Akhtar
                     </div>
                     <div class="invoice-authorized editable" data-id="invoice-authorized">
                         Authorised Signatory
+                    </div>
+                    <div style="font-size: 11px; color: #777; margin-top: 5px;">
+                        Opulence Group Indonesia
                     </div>
                 </div>
             </div>
