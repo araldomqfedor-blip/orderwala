@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchase Order - Damai Agro Farm</title>
+    <title>Purchase Order & Commercial Invoice - Opulence Group Indonesia</title>
     <style>
-        /* Original Purchase Order CSS - NO CHANGES */
         * {
             margin: 0;
             padding: 0;
@@ -24,6 +23,7 @@
             background-color: white;
             padding: 30px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
         
         .header {
@@ -290,10 +290,15 @@
             .container {
                 max-width: 100%;
                 box-shadow: none;
+                margin-bottom: 0;
+                page-break-inside: avoid;
+            }
+            .invoice-container {
+                page-break-before: always;
+                margin-top: 50px;
             }
         }
 
-        /* NEW SIMPLE EDITOR CSS */
         .editable {
             cursor: pointer;
             position: relative;
@@ -327,7 +332,7 @@
         
         .edit-textarea {
             width: 100%;
-            min-height: 50px;
+            min-height: 80px;
             border: none;
             background: transparent;
             font: inherit;
@@ -336,9 +341,10 @@
             margin: 0;
             outline: none;
             resize: vertical;
+            white-space: pre-wrap;
+            line-height: 1.5;
         }
         
-        /* Download Button */
         .download-btn {
             position: fixed;
             bottom: 20px;
@@ -401,18 +407,241 @@
             animation: fadeOut 3s forwards;
         }
         
+        .invoice-container {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invoice-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #1e3a5f;
+            padding-bottom: 20px;
+        }
+
+        .invoice-logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+            background-color: #1e3a5f;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .invoice-title {
+            color: #1e3a5f;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .invoice-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #1e3a5f;
+            padding-left: 12px;
+        }
+
+        .invoice-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .invoice-detail-item {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-left: 3px solid #2d5a4f;
+            font-size: 14px;
+        }
+
+        .invoice-detail-label {
+            font-weight: bold;
+            color: #1e3a5f;
+            display: inline-block;
+            width: 140px;
+        }
+
+        .invoice-detail-value {
+            color: #555;
+        }
+
+        .invoice-content-wrapper {
+            position: relative;
+            min-height: 800px;
+        }
+
+        .invoice-watermark {
+            position: absolute;
+            font-size: 60px;
+            color: rgba(30, 58, 95, 0.08);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            transform: rotate(-45deg) translateX(-50%);
+            top: 40%;
+            left: 50%;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            width: 1000px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .invoice-terms-section {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .invoice-terms-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            text-decoration: underline;
+        }
+
+        .invoice-terms-list {
+            list-style-position: outside;
+            margin-left: 20px;
+        }
+
+        .invoice-terms-list li {
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .invoice-payment-section {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .invoice-payment-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            text-decoration: underline;
+        }
+
+        .invoice-payment-list {
+            list-style-position: outside;
+            margin-left: 20px;
+        }
+
+        .invoice-payment-list li {
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .invoice-signature-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .invoice-signature-box {
+            width: 250px;
+        }
+
+        .invoice-signature-line {
+            border-top: 2px solid #333;
+            margin-bottom: 5px;
+            padding-top: 10px;
+        }
+
+        .invoice-signature-text {
+            font-size: 13px;
+            color: #1e3a5f;
+            font-weight: bold;
+        }
+
+        .invoice-authorized {
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .invoice-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #999;
+        }
+
         @keyframes fadeOut {
             0% { opacity: 1; }
             70% { opacity: 1; }
             100% { opacity: 0; display: none; }
         }
+
+        @media (max-width: 768px) {
+            .invoice-container {
+                padding: 30px;
+                margin: 10px;
+            }
+
+            .invoice-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .invoice-logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .invoice-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .invoice-watermark {
+                font-size: 35px;
+                letter-spacing: 3px;
+                width: 700px;
+                top: 30%;
+            }
+
+            .invoice-title {
+                font-size: 20px;
+            }
+            
+            .invoice-content-wrapper {
+                min-height: 600px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Download and Print Buttons -->
     <button class="print-btn" id="printBtn">
-        <i class="fas fa-print"></i> Print PO
+        <i class="fas fa-print"></i> Print All
     </button>
     
     <a href="#" class="download-btn" id="downloadBtn">
@@ -421,23 +650,24 @@
     
     <div class="status-message" id="statusMessage">Saved!</div>
 
-    <!-- Original Purchase Order - NO CHANGES -->
     <div class="container" id="purchaseOrder">
-        <!-- Header Section -->
         <div class="header">
             <div class="logo-section">
                 <div class="logo editable" data-id="logo-text">
-                    🌿 DAMAI<br>AGRO
+                    🌿 OGI
                 </div>
                 <div class="company-info">
                     <h3 class="editable" data-id="company-name">
-                        Damai Agro Farm
+                        Opulence Group Indonesia
                     </h3>
                     <p class="editable" data-id="company-address">
-                        <strong>Jl. KKO. Thamrin No.12, RT.3/RW.14,<br>Gondangdia, Kec. Daerah Khusus<br>Jakarta 12560</strong>
+                        <strong>Global Trade & Investment Solutions</strong>
                     </p>
                     <p class="editable" data-id="company-details">
-                        NO. PN.03.10.52, 08.04.5 120.DAFEML/OOI9<br>+6285760550561i<br>purchasedaf@yahoo.com<br>www.damaiagrofrm.weebly.com
+                        Tower Anugrah Floor 16 Office Garden E.3.8,<br>
+                        Mega Kuningan Area,<br>
+                        Dr. Ide Anak Agung Gde Street<br>
+                        +62 831-8271-8126
                     </p>
                 </div>
             </div>
@@ -452,7 +682,7 @@
                             PO NUMBER
                         </div>
                         <div class="po-detail-value editable" data-id="po-number">
-                            DAF081
+                            OGI001
                         </div>
                     </div>
                     <div class="po-detail-item">
@@ -460,14 +690,13 @@
                             DATE
                         </div>
                         <div class="po-detail-value editable" data-id="po-date">
-                            03/11/2023
+                            <span id="currentDate">Loading...</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Importer/Exporter Section -->
         <div class="section-header">
             <span class="editable" data-id="importer-label">
                 IMPORTER
@@ -478,45 +707,43 @@
         </div>
         
         <div class="importer-exporter">
-            <!-- Importer -->
             <div class="field-group">
                 <div class="field-label editable" data-id="importer-name-label">
                     Name
                 </div>
                 <div class="field-value editable" data-id="importer-name">
-                    Damai Khamuir
+                    Opulence Group Indonesia
                 </div>
                 
                 <div class="field-label editable" data-id="importer-company-label">
                     Company Name
                 </div>
                 <div class="field-value editable" data-id="importer-company">
-                    Damai Agro Farm
+                    Opulence Group Indonesia
                 </div>
                 
                 <div class="field-label editable" data-id="importer-address-label">
                     Address
                 </div>
                 <div class="field-value editable" data-id="importer-address">
-                    JI. KKO. Thamrin No.12, RT.3/RW.14, Gondangdia, Kec. Daerah Khusus Jakarta 12560
+                    Tower Anugrah Floor 16 Office Garden E.3.8, Mega Kuningan Area, Dr. Ide Anak Agung Gde Street
                 </div>
                 
                 <div class="field-label editable" data-id="importer-phone-label">
                     Phone
                 </div>
                 <div class="field-value editable" data-id="importer-phone">
-                    +6285760550561i
+                    +62 831-8271-8126
                 </div>
                 
                 <div class="field-label editable" data-id="importer-email-label">
                     Email
                 </div>
                 <div class="field-value editable" data-id="importer-email">
-                    <a href="mailto:purchasedaf@yahoo.com" style="color: #0066cc; text-decoration: underline;">purchasedaf@yahoo.com</a>
+                    <a href="mailto:info@opulencegroup.id" style="color: #0066cc; text-decoration: underline;">info@opulencegroup.id</a>
                 </div>
             </div>
             
-            <!-- Exporter -->
             <div class="field-group">
                 <div class="field-label editable" data-id="exporter-name-label">
                     Name
@@ -555,7 +782,6 @@
             </div>
         </div>
         
-        <!-- Shipping Section -->
         <div class="shipping-section">
             <div class="shipping-item">
                 <div class="shipping-label editable" data-id="shipping-terms-label">
@@ -586,7 +812,6 @@
             </div>
         </div>
         
-        <!-- Product Table -->
         <table class="product-table">
             <thead>
                 <tr>
@@ -688,7 +913,6 @@
             </tbody>
         </table>
         
-        <!-- Summary Section -->
         <div class="summary-section">
             <div class="note-box">
                 <div class="note-label editable" data-id="note-label">
@@ -700,9 +924,12 @@
                 </div>
                 <div class="signature-box" style="margin-top: 30px;">
                     <div class="editable" data-id="signature-image" style="display: inline-block;">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Ctext x='10' y='25' font-family='Arial' font-size='12' fill='%231e3a5f' font-style='italic'%3EDAMAI AGRO FARM%3C/text%3E%3C/svg%3E" alt="Signature" style="width: 80px; margin: 10px 0;">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Ctext x='10' y='25' font-family='Arial' font-size='12' fill='%231e3a5f' font-style='italic'%3EOGI%3C/text%3E%3C/svg%3E" alt="Signature" style="width: 80px; margin: 10px 0;">
                     </div>
                     <div class="editable" data-id="signatory-text" style="margin-top: 5px;">
+                        Opulence Group Indonesia
+                    </div>
+                    <div class="editable" data-id="signatory-text" style="margin-top: 2px; font-size: 10px;">
                         Authorized Signatory
                     </div>
                 </div>
@@ -753,32 +980,125 @@
         </div>
     </div>
 
-    <!-- Include html2canvas library for screenshot -->
+    <div class="invoice-container" id="commercialInvoice">
+        <div class="invoice-header">
+            <div class="invoice-logo editable" data-id="invoice-logo">
+                OGI
+            </div>
+            <div class="invoice-title editable" data-id="invoice-title">
+                OPULENCE GROUP INDONESIA
+            </div>
+        </div>
+
+        <div class="invoice-content-wrapper">
+            <div class="invoice-watermark editable" data-id="invoice-watermark">
+                OPULENCE GROUP
+            </div>
+
+            <div class="invoice-details-grid">
+                <div class="invoice-detail-item editable" data-id="invoice-product">
+                    <span class="invoice-detail-label">Product:</span>
+                    <span class="invoice-detail-value">Bioplastash</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-origin">
+                    <span class="invoice-detail-label">Origin:</span>
+                    <span class="invoice-detail-value">INDIA</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-shipment">
+                    <span class="invoice-detail-label">Shipment:</span>
+                    <span class="invoice-detail-value">FOB JNPT, India</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-quantity">
+                    <span class="invoice-detail-label">Quantity:</span>
+                    <span class="invoice-detail-value">700 MT</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-destination">
+                    <span class="invoice-detail-label">Port of Destination:</span>
+                    <span class="invoice-detail-value">Jakarta, INDONESIA</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-packaging">
+                    <span class="invoice-detail-label">Packaging:</span>
+                    <span class="invoice-detail-value">25kg PP Bag</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-payment">
+                    <span class="invoice-detail-label">Payment:</span>
+                    <span class="invoice-detail-value">90% Advanced, 10% against L/R</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-price">
+                    <span class="invoice-detail-label">Price:</span>
+                    <span class="invoice-detail-value">$250.13 /MT</span>
+                </div>
+            </div>
+
+            <div class="invoice-terms-section">
+                <div class="invoice-terms-title editable" data-id="invoice-terms-title">
+                    Importer Terms & Condition
+                </div>
+                <ol class="invoice-terms-list">
+                    <li class="editable" data-id="invoice-term-1">Seller will be paying all the logistic charges from warehouse to Port.</li>
+                    <li class="editable" data-id="invoice-term-2">Seller should be experienced in this commodity</li>
+                    <li class="editable" data-id="invoice-term-3">Seller should be BPOM or US FDA registered as well as their country's registration for export.</li>
+                    <li class="editable" data-id="invoice-term-4">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</li>
+                    <li class="editable" data-id="invoice-term-5">Partially shipment allowed but not more than 3.</li>
+                    <li class="editable" data-id="invoice-term-6">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</li>
+                </ol>
+            </div>
+
+            <div class="invoice-payment-section">
+                <div class="invoice-payment-title editable" data-id="invoice-payment-title">
+                    Terms of Payment
+                </div>
+                <ol class="invoice-payment-list">
+                    <li class="editable" data-id="invoice-payment-1">After getting certification we will take approval for payment</li>
+                    <li class="editable" data-id="invoice-payment-2">90% advanced 10% against L/R.</li>
+                    <li class="editable" data-id="invoice-payment-3">After 90% amount 10% amount will be pay at the time of loading.</li>
+                    <li class="editable" data-id="invoice-payment-4">90% amount will be transferred according to your sending goods to Port.</li>
+                    <li class="editable" data-id="invoice-payment-5">After making advanced, you have to deliver our goods within 40 days.</li>
+                </ol>
+            </div>
+
+            <div class="invoice-signature-section">
+                <div class="invoice-signature-box">
+                    <div class="invoice-signature-line"></div>
+                    <div class="invoice-signature-text editable" data-id="invoice-signature-text">
+                        OPULENCE GROUP INDONESIA
+                    </div>
+                    <div class="invoice-authorized editable" data-id="invoice-authorized">
+                        Authorised Signatory
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-footer editable" data-id="invoice-footer">
+            <p>&copy; 2024 Opulence Group Indonesia. All rights reserved. | Commercial Invoice</p>
+        </div>
+    </div>
+
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script>
-        // Simple Editor - Direct Click to Edit
         document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-GB');
+            document.getElementById('currentDate').textContent = formattedDate;
+            
             setupDirectEditor();
             setupButtons();
         });
         
-        // Setup Direct Click-to-Edit
         function setupDirectEditor() {
             const editableElements = document.querySelectorAll('.editable');
             
             editableElements.forEach(element => {
-                // Store original content
                 element.dataset.original = element.innerHTML;
                 
-                // Add click event
                 element.addEventListener('click', function(e) {
                     e.stopPropagation();
                     startDirectEditing(this);
                 });
             });
             
-            // Click outside to save
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.editable')) {
                     const editingElement = document.querySelector('.editing');
@@ -788,11 +1108,10 @@
                 }
             });
             
-            // Keyboard shortcuts
             document.addEventListener('keydown', function(e) {
                 const editingElement = document.querySelector('.editing');
                 if (editingElement) {
-                    if (e.key === 'Enter' && !e.shiftKey) {
+                    if (e.key === 'Enter' && !e.shiftKey && !e.target.matches('textarea')) {
                         e.preventDefault();
                         saveDirectEdit(editingElement);
                     }
@@ -804,118 +1123,140 @@
             });
         }
         
-        // Start Direct Editing
         function startDirectEditing(element) {
-            // Save current editing if any
             const currentEditing = document.querySelector('.editing');
             if (currentEditing && currentEditing !== element) {
                 saveDirectEdit(currentEditing);
             }
             
-            // Mark as editing
             element.classList.add('editing');
             
-            // Get content
             let content = '';
             if (element.tagName === 'A' || element.querySelector('a')) {
-                // For links/emails
                 const link = element.tagName === 'A' ? element : element.querySelector('a');
                 content = link.textContent;
                 element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
-            } else if (element.classList.contains('note-text')) {
-                // For note text (multiline)
+            } else if (element.classList.contains('note-text') || 
+                      element.classList.contains('company-details') ||
+                      element.classList.contains('invoice-detail-value') ||
+                      element.classList.contains('invoice-terms-list') ||
+                      element.classList.contains('invoice-payment-list') ||
+                      (element.classList.contains('field-value') && element.textContent.length > 50)) {
                 content = element.textContent;
                 element.innerHTML = `<textarea class="edit-textarea">${content}</textarea>`;
+                
+                const textarea = element.querySelector('.edit-textarea');
+                textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
+                
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = Math.max(80, this.scrollHeight) + 'px';
+                });
             } else {
-                // For regular text
                 content = element.textContent;
                 element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
             }
             
-            // Focus and select
             const input = element.querySelector('.edit-input, .edit-textarea');
             if (input) {
                 input.focus();
                 input.select();
                 
-                // Save on blur
                 input.addEventListener('blur', function() {
                     saveDirectEdit(element);
                 });
             }
         }
         
-        // Save Direct Edit
         function saveDirectEdit(element) {
             const input = element.querySelector('.edit-input, .edit-textarea');
             if (!input) return;
             
-            const newValue = input.value.trim();
+            let newValue = input.value.trim();
             
-            // Restore element based on type
-            if (element.dataset.id === 'importer-email') {
-                element.innerHTML = `<a href="mailto:${newValue}" style="color: #0066cc; text-decoration: underline;">${newValue}</a>`;
-            } else if (element.dataset.id === 'exporter-email') {
-                element.innerHTML = newValue;
-            } else if (element.classList.contains('note-text')) {
-                element.textContent = newValue;
-            } else {
+            if (input.matches('textarea')) {
+                const displayValue = newValue.replace(/\n/g, '<br>');
+                element.innerHTML = displayValue;
+            } 
+            else if (element.dataset.id === 'importer-email' || element.dataset.id === 'exporter-email') {
+                if (element.dataset.id === 'importer-email') {
+                    element.innerHTML = `<a href="mailto:${newValue}" style="color: #0066cc; text-decoration: underline;">${newValue}</a>`;
+                } else {
+                    element.innerHTML = newValue;
+                }
+            } 
+            else {
                 element.textContent = newValue;
             }
             
             element.classList.remove('editing');
             showStatus('Saved!');
+            
+            element.dataset.original = element.innerHTML;
         }
         
-        // Cancel Direct Edit
         function cancelDirectEdit(element) {
             element.innerHTML = element.dataset.original || '';
             element.classList.remove('editing');
         }
         
-        // Setup Buttons
         function setupButtons() {
-            // Print Button
             document.getElementById('printBtn').addEventListener('click', function() {
                 window.print();
             });
             
-            // Download as Image Button
             document.getElementById('downloadBtn').addEventListener('click', function(e) {
                 e.preventDefault();
-                downloadAsImage();
+                downloadAllAsImages();
             });
         }
         
-        // Download as Image
-        function downloadAsImage() {
-            const element = document.getElementById('purchaseOrder');
+        function downloadAllAsImages() {
+            showStatus('Creating images...');
             
-            showStatus('Creating image...');
+            const poElement = document.getElementById('purchaseOrder');
+            const invoiceElement = document.getElementById('commercialInvoice');
             
-            html2canvas(element, {
+            html2canvas(poElement, {
                 scale: 2,
                 useCORS: true,
                 logging: false,
                 backgroundColor: '#ffffff'
-            }).then(canvas => {
-                // Convert canvas to image
-                const image = canvas.toDataURL('image/png');
-                
-                // Create download link
-                const link = document.createElement('a');
-                link.download = 'Purchase_Order_Damai_Agro.png';
-                link.href = image;
-                link.click();
-                
-                showStatus('Image downloaded!');
+            }).then(poCanvas => {
+                html2canvas(invoiceElement, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                }).then(invoiceCanvas => {
+                    const poImage = poCanvas.toDataURL('image/png');
+                    const invoiceImage = invoiceCanvas.toDataURL('image/png');
+                    
+                    const poLink = document.createElement('a');
+                    const date = new Date().toISOString().split('T')[0];
+                    poLink.download = `Purchase_Order_OGI_${date}.png`;
+                    poLink.href = poImage;
+                    poLink.click();
+                    
+                    setTimeout(() => {
+                        const invoiceLink = document.createElement('a');
+                        invoiceLink.download = `Commercial_Invoice_OGI_${date}.png`;
+                        invoiceLink.href = invoiceImage;
+                        invoiceLink.click();
+                        
+                        showStatus('Both images downloaded!');
+                    }, 500);
+                    
+                }).catch(error => {
+                    console.error('Error creating invoice image:', error);
+                    showStatus('Error creating images');
+                });
             }).catch(error => {
-                console.error('Error creating image:', error);
-                showStatus('Error creating image');
+                console.error('Error creating PO image:', error);
+                showStatus('Error creating images');
             });
         }
         
-        // Show Status Message
         function showStatus(message) {
             const statusEl = document.getElementById('statusMessage');
             statusEl.textContent = message;
