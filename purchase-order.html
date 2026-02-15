@@ -282,6 +282,7 @@
             font-weight: bold;
         }
         
+        /* Print styles - Buttons hide during print/download */
         @media print {
             body {
                 background-color: white;
@@ -297,7 +298,14 @@
                 page-break-before: always;
                 margin-top: 50px;
             }
-            .add-product-btn, .add-invoice-btn {
+            .add-product-btn, 
+            .add-invoice-btn,
+            .button-container,
+            .invoice-button-container,
+            .print-btn,
+            .download-btn,
+            #printBtn,
+            #downloadBtn {
                 display: none !important;
             }
         }
@@ -506,17 +514,20 @@
             padding: 12px;
             border-left: 3px solid #2d5a4f;
             font-size: 14px;
+            display: flex;
+            align-items: baseline;
         }
 
         .invoice-detail-label {
             font-weight: bold;
             color: #1e3a5f;
-            display: inline-block;
-            width: 140px;
+            min-width: 140px;
+            margin-right: 5px;
         }
 
         .invoice-detail-value {
             color: #555;
+            flex: 1;
         }
 
         .invoice-content-wrapper {
@@ -558,6 +569,7 @@
         .invoice-terms-list {
             list-style-position: outside;
             margin-left: 20px;
+            padding-left: 10px;
         }
 
         .invoice-terms-list li {
@@ -583,6 +595,7 @@
         .invoice-payment-list {
             list-style-position: outside;
             margin-left: 20px;
+            padding-left: 10px;
         }
 
         .invoice-payment-list li {
@@ -630,7 +643,7 @@
             color: #999;
         }
         
-        /* Add Product Button - Exactly matching theme */
+        /* Add Product Button */
         .add-product-btn {
             background-color: #1e3a5f;
             color: white;
@@ -696,6 +709,17 @@
             margin-top: 5px;
             margin-bottom: 20px;
         }
+        
+        /* Fix for list numbers - only show once */
+        .invoice-terms-list li, .invoice-payment-list li {
+            list-style-type: decimal;
+        }
+        
+        /* Hide any extra number spans */
+        .invoice-terms-list li span.editable[data-id*="number"],
+        .invoice-payment-list li span.editable[data-id*="number"] {
+            display: none;
+        }
 
         @keyframes fadeOut {
             0% { opacity: 1; }
@@ -744,6 +768,15 @@
             
             .signature-image {
                 width: 120px;
+            }
+            
+            .invoice-detail-item {
+                flex-direction: column;
+            }
+            
+            .invoice-detail-label {
+                min-width: auto;
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -1024,7 +1057,7 @@
             </tbody>
         </table>
         
-        <!-- Add Product Button -->
+        <!-- Add Product Button - will be hidden in print/download -->
         <div class="button-container">
             <button class="add-product-btn" id="addProductBtn">
                 <i class="fas fa-plus-circle"></i> Add New Product
@@ -1158,7 +1191,7 @@
                 </div>
             </div>
             
-            <!-- Add New Button for Invoice Details -->
+            <!-- Add New Button for Invoice Details - will be hidden in print/download -->
             <div class="invoice-button-container">
                 <button class="add-invoice-btn" id="addInvoiceDetailBtn">
                     <i class="fas fa-plus-circle"></i> Add New
@@ -1170,12 +1203,12 @@
                     Importer Terms & Condition
                 </div>
                 <ol class="invoice-terms-list" id="termsList">
-                    <li class="editable" data-id="invoice-term-1"><span class="editable" data-id="invoice-term-1-number">1.</span> Seller will be paying all the logistic charges from warehouse to Port.</li>
-                    <li class="editable" data-id="invoice-term-2"><span class="editable" data-id="invoice-term-2-number">2.</span> Seller should be experienced in this commodity</li>
-                    <li class="editable" data-id="invoice-term-3"><span class="editable" data-id="invoice-term-3-number">3.</span> Seller should be BPOM or US FDA registered as well as their country's registration for export.</li>
-                    <li class="editable" data-id="invoice-term-4"><span class="editable" data-id="invoice-term-4-number">4.</span> Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</li>
-                    <li class="editable" data-id="invoice-term-5"><span class="editable" data-id="invoice-term-5-number">5.</span> Partially shipment allowed but not more than 3.</li>
-                    <li class="editable" data-id="invoice-term-6"><span class="editable" data-id="invoice-term-6-number">6.</span> As per all terms and conditions between you and us We will not take our step back after getting the certifications.</li>
+                    <li class="editable" data-id="invoice-term-1">Seller will be paying all the logistic charges from warehouse to Port.</li>
+                    <li class="editable" data-id="invoice-term-2">Seller should be experienced in this commodity</li>
+                    <li class="editable" data-id="invoice-term-3">Seller should be BPOM or US FDA registered as well as their country's registration for export.</li>
+                    <li class="editable" data-id="invoice-term-4">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</li>
+                    <li class="editable" data-id="invoice-term-5">Partially shipment allowed but not more than 3.</li>
+                    <li class="editable" data-id="invoice-term-6">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</li>
                 </ol>
             </div>
 
@@ -1184,11 +1217,11 @@
                     Terms of Payment
                 </div>
                 <ol class="invoice-payment-list" id="paymentList">
-                    <li class="editable" data-id="invoice-payment-1"><span class="editable" data-id="invoice-payment-1-number">1.</span> After getting certification we will take approval for payment</li>
-                    <li class="editable" data-id="invoice-payment-2"><span class="editable" data-id="invoice-payment-2-number">2.</span> 90% advanced 10% against L/R.</li>
-                    <li class="editable" data-id="invoice-payment-3"><span class="editable" data-id="invoice-payment-3-number">3.</span> After 90% amount 10% amount will be pay at the time of loading.</li>
-                    <li class="editable" data-id="invoice-payment-4"><span class="editable" data-id="invoice-payment-4-number">4.</span> 90% amount will be transferred according to your sending goods to Port.</li>
-                    <li class="editable" data-id="invoice-payment-5"><span class="editable" data-id="invoice-payment-5-number">5.</span> After making advanced, you have to deliver our goods within 40 days.</li>
+                    <li class="editable" data-id="invoice-payment-1">After getting certification we will take approval for payment</li>
+                    <li class="editable" data-id="invoice-payment-2">90% advanced 10% against L/R.</li>
+                    <li class="editable" data-id="invoice-payment-3">After 90% amount 10% amount will be pay at the time of loading.</li>
+                    <li class="editable" data-id="invoice-payment-4">90% amount will be transferred according to your sending goods to Port.</li>
+                    <li class="editable" data-id="invoice-payment-5">After making advanced, you have to deliver our goods within 40 days.</li>
                 </ol>
             </div>
 
@@ -1237,29 +1270,13 @@
             setupButtons();
             setupAddProductButton();
             setupAddInvoiceDetailButton();
-            
-            // Make list numbers editable
-            makeListNumbersEditable();
         });
-        
-        // Make numbers in lists editable
-        function makeListNumbersEditable() {
-            const numberSpans = document.querySelectorAll('.invoice-terms-list li span, .invoice-payment-list li span');
-            numberSpans.forEach(span => {
-                span.classList.add('editable');
-                span.setAttribute('data-id', span.getAttribute('data-id') || 'list-number-' + Math.random());
-                
-                // Re-attach listeners
-                span.removeEventListener('click', startDirectEditingHandler);
-                span.addEventListener('click', startDirectEditingHandler);
-            });
-        }
         
         // Track product row count
         let productRowCount = 6;
         
         // Track invoice detail count
-        let invoiceDetailCount = 8; // Starting from 8 because we have 8 existing details
+        let invoiceDetailCount = 8;
         
         function setupAddProductButton() {
             const addBtn = document.getElementById('addProductBtn');
@@ -1288,7 +1305,7 @@
             newItem.className = 'invoice-detail-item editable';
             newItem.setAttribute('data-id', `invoice-detail-${invoiceDetailCount}`);
             
-            // Random label and value
+            // Random label
             const labels = ['Custom Label:', 'Additional Info:', 'Reference:', 'Notes:', 'Special:'];
             const randomLabel = labels[Math.floor(Math.random() * labels.length)];
             
@@ -1483,18 +1500,31 @@
             const poElement = document.getElementById('purchaseOrder');
             const invoiceElement = document.getElementById('commercialInvoice');
             
+            // Temporarily hide buttons for screenshot
+            const addProductBtn = document.querySelector('.button-container');
+            const addInvoiceBtn = document.querySelector('.invoice-button-container');
+            
+            if (addProductBtn) addProductBtn.style.visibility = 'hidden';
+            if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'hidden';
+            
             html2canvas(poElement, {
                 scale: 2,
                 useCORS: true,
                 logging: false,
-                backgroundColor: '#ffffff'
+                backgroundColor: '#ffffff',
+                allowTaint: true
             }).then(poCanvas => {
                 html2canvas(invoiceElement, {
                     scale: 2,
                     useCORS: true,
                     logging: false,
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#ffffff',
+                    allowTaint: true
                 }).then(invoiceCanvas => {
+                    // Show buttons back
+                    if (addProductBtn) addProductBtn.style.visibility = 'visible';
+                    if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
+                    
                     const poImage = poCanvas.toDataURL('image/png');
                     const invoiceImage = invoiceCanvas.toDataURL('image/png');
                     
@@ -1514,10 +1544,16 @@
                     }, 500);
                     
                 }).catch(error => {
+                    // Show buttons back in case of error
+                    if (addProductBtn) addProductBtn.style.visibility = 'visible';
+                    if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
                     console.error('Error creating invoice image:', error);
                     showStatus('Error creating images');
                 });
             }).catch(error => {
+                // Show buttons back in case of error
+                if (addProductBtn) addProductBtn.style.visibility = 'visible';
+                if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
                 console.error('Error creating PO image:', error);
                 showStatus('Error creating images');
             });
