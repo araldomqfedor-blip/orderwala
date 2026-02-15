@@ -567,9 +567,9 @@
         }
 
         .invoice-terms-list {
-            list-style-position: outside;
-            margin-left: 20px;
-            padding-left: 10px;
+            list-style: none;
+            margin-left: 0;
+            padding-left: 0;
         }
 
         .invoice-terms-list li {
@@ -577,6 +577,8 @@
             font-size: 13px;
             color: #333;
             line-height: 1.5;
+            display: flex;
+            align-items: baseline;
         }
 
         .invoice-payment-section {
@@ -593,9 +595,9 @@
         }
 
         .invoice-payment-list {
-            list-style-position: outside;
-            margin-left: 20px;
-            padding-left: 10px;
+            list-style: none;
+            margin-left: 0;
+            padding-left: 0;
         }
 
         .invoice-payment-list li {
@@ -603,6 +605,20 @@
             font-size: 13px;
             color: #333;
             line-height: 1.5;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .list-number {
+            font-weight: bold;
+            color: #1e3a5f;
+            min-width: 25px;
+            margin-right: 8px;
+            display: inline-block;
+        }
+
+        .list-text {
+            flex: 1;
         }
 
         .invoice-signature-section {
@@ -708,17 +724,6 @@
             text-align: left;
             margin-top: 5px;
             margin-bottom: 20px;
-        }
-        
-        /* Fix for list numbers - only show once */
-        .invoice-terms-list li, .invoice-payment-list li {
-            list-style-type: decimal;
-        }
-        
-        /* Hide any extra number spans */
-        .invoice-terms-list li span.editable[data-id*="number"],
-        .invoice-payment-list li span.editable[data-id*="number"] {
-            display: none;
         }
 
         @keyframes fadeOut {
@@ -1057,7 +1062,7 @@
             </tbody>
         </table>
         
-        <!-- Add Product Button - will be hidden in print/download -->
+        <!-- Add Product Button -->
         <div class="button-container">
             <button class="add-product-btn" id="addProductBtn">
                 <i class="fas fa-plus-circle"></i> Add New Product
@@ -1191,7 +1196,7 @@
                 </div>
             </div>
             
-            <!-- Add New Button for Invoice Details - will be hidden in print/download -->
+            <!-- Add New Button for Invoice Details -->
             <div class="invoice-button-container">
                 <button class="add-invoice-btn" id="addInvoiceDetailBtn">
                     <i class="fas fa-plus-circle"></i> Add New
@@ -1202,27 +1207,60 @@
                 <div class="invoice-terms-title editable" data-id="invoice-terms-title">
                     Importer Terms & Condition
                 </div>
-                <ol class="invoice-terms-list" id="termsList">
-                    <li class="editable" data-id="invoice-term-1">Seller will be paying all the logistic charges from warehouse to Port.</li>
-                    <li class="editable" data-id="invoice-term-2">Seller should be experienced in this commodity</li>
-                    <li class="editable" data-id="invoice-term-3">Seller should be BPOM or US FDA registered as well as their country's registration for export.</li>
-                    <li class="editable" data-id="invoice-term-4">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</li>
-                    <li class="editable" data-id="invoice-term-5">Partially shipment allowed but not more than 3.</li>
-                    <li class="editable" data-id="invoice-term-6">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</li>
-                </ol>
+                <ul class="invoice-terms-list" id="termsList">
+                    <li class="editable" data-id="invoice-term-1">
+                        <span class="list-number editable" data-id="invoice-term-1-number">1.</span>
+                        <span class="list-text">Seller will be paying all the logistic charges from warehouse to Port.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-2">
+                        <span class="list-number editable" data-id="invoice-term-2-number">2.</span>
+                        <span class="list-text">Seller should be experienced in this commodity</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-3">
+                        <span class="list-number editable" data-id="invoice-term-3-number">3.</span>
+                        <span class="list-text">Seller should be BPOM or US FDA registered as well as their country's registration for export.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-4">
+                        <span class="list-number editable" data-id="invoice-term-4-number">4.</span>
+                        <span class="list-text">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-5">
+                        <span class="list-number editable" data-id="invoice-term-5-number">5.</span>
+                        <span class="list-text">Partially shipment allowed but not more than 3.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-6">
+                        <span class="list-number editable" data-id="invoice-term-6-number">6.</span>
+                        <span class="list-text">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</span>
+                    </li>
+                </ul>
             </div>
 
             <div class="invoice-payment-section">
                 <div class="invoice-payment-title editable" data-id="invoice-payment-title">
                     Terms of Payment
                 </div>
-                <ol class="invoice-payment-list" id="paymentList">
-                    <li class="editable" data-id="invoice-payment-1">After getting certification we will take approval for payment</li>
-                    <li class="editable" data-id="invoice-payment-2">90% advanced 10% against L/R.</li>
-                    <li class="editable" data-id="invoice-payment-3">After 90% amount 10% amount will be pay at the time of loading.</li>
-                    <li class="editable" data-id="invoice-payment-4">90% amount will be transferred according to your sending goods to Port.</li>
-                    <li class="editable" data-id="invoice-payment-5">After making advanced, you have to deliver our goods within 40 days.</li>
-                </ol>
+                <ul class="invoice-payment-list" id="paymentList">
+                    <li class="editable" data-id="invoice-payment-1">
+                        <span class="list-number editable" data-id="invoice-payment-1-number">1.</span>
+                        <span class="list-text">After getting certification we will take approval for payment</span>
+                    </li>
+                    <li class="editable" data-id="invoice-payment-2">
+                        <span class="list-number editable" data-id="invoice-payment-2-number">2.</span>
+                        <span class="list-text">90% advanced 10% against L/R.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-payment-3">
+                        <span class="list-number editable" data-id="invoice-payment-3-number">3.</span>
+                        <span class="list-text">After 90% amount 10% amount will be pay at the time of loading.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-payment-4">
+                        <span class="list-number editable" data-id="invoice-payment-4-number">4.</span>
+                        <span class="list-text">90% amount will be transferred according to your sending goods to Port.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-payment-5">
+                        <span class="list-number editable" data-id="invoice-payment-5-number">5.</span>
+                        <span class="list-text">After making advanced, you have to deliver our goods within 40 days.</span>
+                    </li>
+                </ul>
             </div>
 
             <div class="invoice-signature-section">
@@ -1422,8 +1460,6 @@
             } else if (element.classList.contains('note-text') || 
                       element.classList.contains('company-details') ||
                       element.classList.contains('invoice-detail-value') ||
-                      element.classList.contains('invoice-terms-list') ||
-                      element.classList.contains('invoice-payment-list') ||
                       (element.classList.contains('field-value') && element.textContent.length > 50)) {
                 content = element.textContent;
                 element.innerHTML = `<textarea class="edit-textarea">${content}</textarea>`;
