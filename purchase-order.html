@@ -190,7 +190,7 @@
         .product-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             background-color: #d4e6f1;
         }
         
@@ -296,6 +296,9 @@
             .invoice-container {
                 page-break-before: always;
                 margin-top: 50px;
+            }
+            .add-product-btn {
+                display: none !important;
             }
         }
 
@@ -407,7 +410,6 @@
             animation: fadeOut 3s forwards;
         }
         
-        /* Updated: Vertical Stack for Stamp and Signature */
         .signature-stamp-container {
             display: flex;
             flex-direction: column;
@@ -626,6 +628,39 @@
             border-top: 1px solid #ddd;
             font-size: 12px;
             color: #999;
+        }
+        
+        /* Add Product Button - Exactly matching theme */
+        .add-product-btn {
+            background-color: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+            border: 1px solid #1e3a5f;
+        }
+        
+        .add-product-btn:hover {
+            background-color: #2d5a4f;
+            border-color: #2d5a4f;
+        }
+        
+        .add-product-btn i {
+            font-size: 14px;
+        }
+        
+        .button-container {
+            text-align: left;
+            margin-top: 5px;
+            margin-bottom: 15px;
         }
 
         @keyframes fadeOut {
@@ -853,7 +888,8 @@
             </div>
         </div>
         
-        <table class="product-table">
+        <!-- Product Table - Exactly same styling, only button added below -->
+        <table class="product-table" id="productTable">
             <thead>
                 <tr>
                     <th style="width: 15%;" class="editable" data-id="product-code-header">
@@ -873,7 +909,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="productTableBody">
                 <tr>
                     <td class="editable" data-id="product-code-1">
                         09103030
@@ -954,6 +990,13 @@
             </tbody>
         </table>
         
+        <!-- NEW: Add Product Button - Exactly as requested, only in product section -->
+        <div class="button-container">
+            <button class="add-product-btn" id="addProductBtn">
+                <i class="fas fa-plus-circle"></i> Add New Product
+            </button>
+        </div>
+        
         <div class="summary-section">
             <div class="note-box">
                 <div class="note-label editable" data-id="note-label">
@@ -964,8 +1007,7 @@
                     FALL OF MARKET PRICES FROM DATE OF ISSUE.
                 </div>
                 
-                <!-- NOTE section में Signature और Stamp REMOVED -->
-                <!-- Now ONLY Authorised Signatory section में Signature और Stamp होंगे -->
+                <!-- NOTE section mein koi change nahi -->
                 
             </div>
             
@@ -1013,23 +1055,20 @@
             </table>
         </div>
         
-        <!-- NEW: Separate Authorised Signatory Section with Stamp and Signature -->
+        <!-- Authorised Signatory Section - Bilkul same -->
         <div class="signature-stamp-container" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #1e3a5f;">
-            <!-- 1. SIGNATURE (TOP) -->
             <div class="editable" data-id="signature-image-po" style="display: inline-block; z-index: 2;">
                 <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
                      alt="Authorized Signature" 
                      class="signature-image">
             </div>
             
-            <!-- 2. STAMP (MIDDLE - under Signature) -->
             <div class="editable" data-id="stamp-image-po" style="display: inline-block; z-index: 1; margin-top: -30px;">
                 <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
                      alt="Company Stamp" 
                      class="stamp-image">
             </div>
             
-            <!-- 3. AUTHORIZED SIGNATORY TEXT (BOTTOM) -->
             <div class="editable" data-id="signatory-text-po" style="margin-top: 10px; text-align: center;">
                 <div class="authorized-signatory">Aiman Akhtar</div>
                 <div style="font-size: 11px; color: #555; margin-top: 5px;">Authorized Signatory</div>
@@ -1115,24 +1154,20 @@
                 </ol>
             </div>
 
-            <!-- UPDATED: Signature and Stamp in Separate Authorised Signatory Section -->
             <div class="invoice-signature-section">
                 <div class="invoice-signature-box">
-                    <!-- 1. SIGNATURE (TOP) -->
                     <div class="editable" data-id="signature-image-invoice" style="text-align: center; margin-bottom: -25px; z-index: 2;">
                         <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
                              alt="Authorized Signature" 
                              style="width: 150px; height: auto; filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));">
                     </div>
                     
-                    <!-- 2. STAMP (MIDDLE - under Signature) -->
                     <div class="editable" data-id="stamp-image-invoice" style="text-align: center; z-index: 1;">
                         <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
                              alt="Company Stamp" 
                              style="width: 180px; height: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2)); margin-top: -30px;">
                     </div>
                     
-                    <!-- 3. SIGNATURE LINE AND TEXT (BOTTOM) -->
                     <div class="invoice-signature-line" style="margin-top: 10px;"></div>
                     <div class="invoice-signature-text editable" data-id="invoice-signature-text">
                         Aiman Akhtar
@@ -1162,7 +1197,70 @@
             
             setupDirectEditor();
             setupButtons();
+            setupAddProductButton(); // New function for adding products
         });
+        
+        // Track product row count for unique data-ids
+        let productRowCount = 6; // Starting from 6 because we have 6 existing rows
+        
+        function setupAddProductButton() {
+            const addBtn = document.getElementById('addProductBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    addNewProductRow();
+                });
+            }
+        }
+        
+        function addNewProductRow() {
+            productRowCount++;
+            const tbody = document.getElementById('productTableBody');
+            
+            // Create new row
+            const newRow = document.createElement('tr');
+            
+            // Create cells with proper data-id attributes
+            const cells = [
+                { type: 'td', className: 'editable', dataId: `product-code-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-description-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-quantity-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-unit-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-price-${productRowCount}`, content: '' }
+            ];
+            
+            cells.forEach(cell => {
+                const td = document.createElement(cell.type);
+                td.className = cell.className;
+                td.setAttribute('data-id', cell.dataId);
+                td.textContent = cell.content;
+                newRow.appendChild(td);
+            });
+            
+            // Append to tbody
+            tbody.appendChild(newRow);
+            
+            // Re-attach editable listeners to new row
+            attachEditableListenersToElement(newRow);
+            
+            showStatus('New product row added!');
+        }
+        
+        function attachEditableListenersToElement(element) {
+            const editableElements = element.querySelectorAll('.editable');
+            editableElements.forEach(el => {
+                el.dataset.original = el.innerHTML;
+                
+                // Remove existing listeners to avoid duplicates
+                el.removeEventListener('click', startDirectEditingHandler);
+                el.addEventListener('click', startDirectEditingHandler);
+            });
+        }
+        
+        // Handler function to avoid duplication
+        function startDirectEditingHandler(e) {
+            e.stopPropagation();
+            startDirectEditing(this);
+        }
         
         function setupDirectEditor() {
             const editableElements = document.querySelectorAll('.editable');
