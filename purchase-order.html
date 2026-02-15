@@ -297,7 +297,7 @@
                 page-break-before: always;
                 margin-top: 50px;
             }
-            .add-product-btn {
+            .add-product-btn, .add-invoice-btn {
                 display: none !important;
             }
         }
@@ -498,7 +498,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .invoice-detail-item {
@@ -662,6 +662,40 @@
             margin-top: 5px;
             margin-bottom: 15px;
         }
+        
+        /* Add New button for invoice details */
+        .add-invoice-btn {
+            background-color: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.3s;
+            border: 1px solid #1e3a5f;
+        }
+        
+        .add-invoice-btn:hover {
+            background-color: #2d5a4f;
+            border-color: #2d5a4f;
+        }
+        
+        .add-invoice-btn i {
+            font-size: 12px;
+        }
+        
+        .invoice-button-container {
+            text-align: left;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
 
         @keyframes fadeOut {
             0% { opacity: 1; }
@@ -816,7 +850,7 @@
                     Email
                 </div>
                 <div class="field-value editable" data-id="importer-email">
-                    <a href="mailto:info@opulencegroup.id" style="color: #0066cc; text-decoration: underline;">info@opulencegroup.id</a>
+                    <a href="mailto:purchase.opulencegroupindonesia@yahoo.com" style="color: #0066cc; text-decoration: underline;">purchase.opulencegroupindonesia@yahoo.com</a>
                 </div>
             </div>
             
@@ -888,7 +922,7 @@
             </div>
         </div>
         
-        <!-- Product Table - Exactly same styling, only button added below -->
+        <!-- Product Table -->
         <table class="product-table" id="productTable">
             <thead>
                 <tr>
@@ -990,7 +1024,7 @@
             </tbody>
         </table>
         
-        <!-- NEW: Add Product Button - Exactly as requested, only in product section -->
+        <!-- Add Product Button -->
         <div class="button-container">
             <button class="add-product-btn" id="addProductBtn">
                 <i class="fas fa-plus-circle"></i> Add New Product
@@ -1006,9 +1040,6 @@
                     THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>
                     FALL OF MARKET PRICES FROM DATE OF ISSUE.
                 </div>
-                
-                <!-- NOTE section mein koi change nahi -->
-                
             </div>
             
             <table class="summary-table">
@@ -1055,7 +1086,7 @@
             </table>
         </div>
         
-        <!-- Authorised Signatory Section - Bilkul same -->
+        <!-- Authorised Signatory Section -->
         <div class="signature-stamp-container" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #1e3a5f;">
             <div class="editable" data-id="signature-image-po" style="display: inline-block; z-index: 2;">
                 <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
@@ -1092,7 +1123,7 @@
                 OPULENCE GROUP
             </div>
 
-            <div class="invoice-details-grid">
+            <div class="invoice-details-grid" id="invoiceDetailsGrid">
                 <div class="invoice-detail-item editable" data-id="invoice-product">
                     <span class="invoice-detail-label">Product:</span>
                     <span class="invoice-detail-value">Bioplastash</span>
@@ -1126,18 +1157,25 @@
                     <span class="invoice-detail-value">$250.13 /MT</span>
                 </div>
             </div>
+            
+            <!-- Add New Button for Invoice Details -->
+            <div class="invoice-button-container">
+                <button class="add-invoice-btn" id="addInvoiceDetailBtn">
+                    <i class="fas fa-plus-circle"></i> Add New
+                </button>
+            </div>
 
             <div class="invoice-terms-section">
                 <div class="invoice-terms-title editable" data-id="invoice-terms-title">
                     Importer Terms & Condition
                 </div>
-                <ol class="invoice-terms-list">
-                    <li class="editable" data-id="invoice-term-1">Seller will be paying all the logistic charges from warehouse to Port.</li>
-                    <li class="editable" data-id="invoice-term-2">Seller should be experienced in this commodity</li>
-                    <li class="editable" data-id="invoice-term-3">Seller should be BPOM or US FDA registered as well as their country's registration for export.</li>
-                    <li class="editable" data-id="invoice-term-4">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</li>
-                    <li class="editable" data-id="invoice-term-5">Partially shipment allowed but not more than 3.</li>
-                    <li class="editable" data-id="invoice-term-6">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</li>
+                <ol class="invoice-terms-list" id="termsList">
+                    <li class="editable" data-id="invoice-term-1"><span class="editable" data-id="invoice-term-1-number">1.</span> Seller will be paying all the logistic charges from warehouse to Port.</li>
+                    <li class="editable" data-id="invoice-term-2"><span class="editable" data-id="invoice-term-2-number">2.</span> Seller should be experienced in this commodity</li>
+                    <li class="editable" data-id="invoice-term-3"><span class="editable" data-id="invoice-term-3-number">3.</span> Seller should be BPOM or US FDA registered as well as their country's registration for export.</li>
+                    <li class="editable" data-id="invoice-term-4"><span class="editable" data-id="invoice-term-4-number">4.</span> Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</li>
+                    <li class="editable" data-id="invoice-term-5"><span class="editable" data-id="invoice-term-5-number">5.</span> Partially shipment allowed but not more than 3.</li>
+                    <li class="editable" data-id="invoice-term-6"><span class="editable" data-id="invoice-term-6-number">6.</span> As per all terms and conditions between you and us We will not take our step back after getting the certifications.</li>
                 </ol>
             </div>
 
@@ -1145,12 +1183,12 @@
                 <div class="invoice-payment-title editable" data-id="invoice-payment-title">
                     Terms of Payment
                 </div>
-                <ol class="invoice-payment-list">
-                    <li class="editable" data-id="invoice-payment-1">After getting certification we will take approval for payment</li>
-                    <li class="editable" data-id="invoice-payment-2">90% advanced 10% against L/R.</li>
-                    <li class="editable" data-id="invoice-payment-3">After 90% amount 10% amount will be pay at the time of loading.</li>
-                    <li class="editable" data-id="invoice-payment-4">90% amount will be transferred according to your sending goods to Port.</li>
-                    <li class="editable" data-id="invoice-payment-5">After making advanced, you have to deliver our goods within 40 days.</li>
+                <ol class="invoice-payment-list" id="paymentList">
+                    <li class="editable" data-id="invoice-payment-1"><span class="editable" data-id="invoice-payment-1-number">1.</span> After getting certification we will take approval for payment</li>
+                    <li class="editable" data-id="invoice-payment-2"><span class="editable" data-id="invoice-payment-2-number">2.</span> 90% advanced 10% against L/R.</li>
+                    <li class="editable" data-id="invoice-payment-3"><span class="editable" data-id="invoice-payment-3-number">3.</span> After 90% amount 10% amount will be pay at the time of loading.</li>
+                    <li class="editable" data-id="invoice-payment-4"><span class="editable" data-id="invoice-payment-4-number">4.</span> 90% amount will be transferred according to your sending goods to Port.</li>
+                    <li class="editable" data-id="invoice-payment-5"><span class="editable" data-id="invoice-payment-5-number">5.</span> After making advanced, you have to deliver our goods within 40 days.</li>
                 </ol>
             </div>
 
@@ -1197,11 +1235,31 @@
             
             setupDirectEditor();
             setupButtons();
-            setupAddProductButton(); // New function for adding products
+            setupAddProductButton();
+            setupAddInvoiceDetailButton();
+            
+            // Make list numbers editable
+            makeListNumbersEditable();
         });
         
-        // Track product row count for unique data-ids
-        let productRowCount = 6; // Starting from 6 because we have 6 existing rows
+        // Make numbers in lists editable
+        function makeListNumbersEditable() {
+            const numberSpans = document.querySelectorAll('.invoice-terms-list li span, .invoice-payment-list li span');
+            numberSpans.forEach(span => {
+                span.classList.add('editable');
+                span.setAttribute('data-id', span.getAttribute('data-id') || 'list-number-' + Math.random());
+                
+                // Re-attach listeners
+                span.removeEventListener('click', startDirectEditingHandler);
+                span.addEventListener('click', startDirectEditingHandler);
+            });
+        }
+        
+        // Track product row count
+        let productRowCount = 6;
+        
+        // Track invoice detail count
+        let invoiceDetailCount = 8; // Starting from 8 because we have 8 existing details
         
         function setupAddProductButton() {
             const addBtn = document.getElementById('addProductBtn');
@@ -1212,6 +1270,41 @@
             }
         }
         
+        function setupAddInvoiceDetailButton() {
+            const addBtn = document.getElementById('addInvoiceDetailBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    addNewInvoiceDetail();
+                });
+            }
+        }
+        
+        function addNewInvoiceDetail() {
+            invoiceDetailCount++;
+            const grid = document.getElementById('invoiceDetailsGrid');
+            
+            // Create new detail item
+            const newItem = document.createElement('div');
+            newItem.className = 'invoice-detail-item editable';
+            newItem.setAttribute('data-id', `invoice-detail-${invoiceDetailCount}`);
+            
+            // Random label and value
+            const labels = ['Custom Label:', 'Additional Info:', 'Reference:', 'Notes:', 'Special:'];
+            const randomLabel = labels[Math.floor(Math.random() * labels.length)];
+            
+            newItem.innerHTML = `
+                <span class="invoice-detail-label editable" data-id="invoice-detail-label-${invoiceDetailCount}">${randomLabel}</span>
+                <span class="invoice-detail-value editable" data-id="invoice-detail-value-${invoiceDetailCount}">New Detail</span>
+            `;
+            
+            grid.appendChild(newItem);
+            
+            // Make new item editable
+            attachEditableListenersToElement(newItem);
+            
+            showStatus('New detail added!');
+        }
+        
         function addNewProductRow() {
             productRowCount++;
             const tbody = document.getElementById('productTableBody');
@@ -1219,7 +1312,7 @@
             // Create new row
             const newRow = document.createElement('tr');
             
-            // Create cells with proper data-id attributes
+            // Create cells
             const cells = [
                 { type: 'td', className: 'editable', dataId: `product-code-${productRowCount}`, content: '' },
                 { type: 'td', className: 'editable', dataId: `product-description-${productRowCount}`, content: '' },
@@ -1236,10 +1329,9 @@
                 newRow.appendChild(td);
             });
             
-            // Append to tbody
             tbody.appendChild(newRow);
             
-            // Re-attach editable listeners to new row
+            // Attach editable listeners
             attachEditableListenersToElement(newRow);
             
             showStatus('New product row added!');
@@ -1250,13 +1342,12 @@
             editableElements.forEach(el => {
                 el.dataset.original = el.innerHTML;
                 
-                // Remove existing listeners to avoid duplicates
                 el.removeEventListener('click', startDirectEditingHandler);
                 el.addEventListener('click', startDirectEditingHandler);
             });
         }
         
-        // Handler function to avoid duplication
+        // Handler function
         function startDirectEditingHandler(e) {
             e.stopPropagation();
             startDirectEditing(this);
