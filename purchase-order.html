@@ -430,7 +430,6 @@
             border-top: 2px solid #1e3a5f;
         }
         
-        /* Stamp container - positioned absolute within relative container */
         .stamp-wrapper {
             position: absolute;
             top: 50%;
@@ -440,7 +439,6 @@
             z-index: 1;
         }
         
-        /* Signature container - positioned absolute same position as stamp */
         .signature-wrapper {
             position: absolute;
             top: 50%;
@@ -702,7 +700,6 @@
             margin: 10px 0 15px 0;
         }
         
-        /* Invoice signature container with stamp and signature exactly same position */
         .invoice-signature-stamp-container {
             position: relative;
             width: 250px;
@@ -813,7 +810,10 @@
         <div class="button-container"><button class="add-product-btn" id="addProductBtn"><i class="fas fa-plus-circle"></i> Add New Product</button></div>
         
         <div class="summary-section">
-            <div class="note-box"><div class="note-label editable" data-id="note-label">NOTE:</div><div class="note-text editable" data-id="note-text">THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>FALL OF MARKET PRICES FROM DATE OF ISSUE.</div></div>
+            <div class="note-box">
+                <div class="note-label editable" data-id="note-label">NOTE:</div>
+                <div class="note-text editable" data-id="note-text">THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>FALL OF MARKET PRICES FROM DATE OF ISSUE.</div>
+            </div>
             <table class="summary-table">
                 <tr><td class="editable" data-id="subtotal-label">Subtotal ($)</td><td class="editable" data-id="subtotal-value">1,75,091.00</td></tr>
                 <tr><td class="editable" data-id="product-goods-label">Product (Goods) ($)</td><td class="editable" data-id="product-goods-value">1,75,091.00</td></tr>
@@ -823,7 +823,7 @@
             </table>
         </div>
         
-        <!-- PO Signature and Stamp - exactly same position -->
+        <!-- PO Signature and Stamp - exactly same position (THIS IS THE LAST ONE) -->
         <div class="signature-stamp-container">
             <div class="stamp-wrapper">
                 <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="stamp-image">
@@ -886,7 +886,6 @@
             
             <div class="invoice-signature-section">
                 <div class="invoice-signature-box">
-                    <!-- Invoice Signature and Stamp - exactly same position -->
                     <div class="invoice-signature-stamp-container">
                         <div class="invoice-stamp-wrapper">
                             <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="invoice-stamp-image">
