@@ -419,36 +419,56 @@
         }
         
         .signature-stamp-container {
+            position: relative;
+            width: 100%;
+            min-height: 150px;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 5px;
             margin-top: 40px;
             padding-top: 20px;
             border-top: 2px solid #1e3a5f;
         }
         
-        .stamp-image {
+        /* Stamp container - positioned absolute within relative container */
+        .stamp-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 180px;
-            height: auto;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
-            margin-top: -10px;
             z-index: 1;
         }
         
-        .signature-image {
+        /* Signature container - positioned absolute same position as stamp */
+        .signature-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 150px;
-            height: auto;
-            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
             z-index: 2;
-            position: relative;
-            margin-bottom: -20px;
+        }
+        
+        .stamp-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .signature-image {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         
         .authorized-signatory {
+            position: relative;
+            z-index: 3;
+            margin-top: 100px;
+            text-align: center;
             font-size: 14px;
             color: #555;
-            margin-top: 10px;
             font-weight: bold;
         }
         
@@ -588,7 +608,6 @@
             text-decoration: underline;
         }
 
-        /* ALL TEXT NOW 14px */
         .invoice-payment-content strong {
             font-size: 14px;
             font-weight: bold;
@@ -683,6 +702,38 @@
             margin: 10px 0 15px 0;
         }
         
+        /* Invoice signature container with stamp and signature exactly same position */
+        .invoice-signature-stamp-container {
+            position: relative;
+            width: 250px;
+            height: 150px;
+            margin: 0 auto 20px auto;
+        }
+        
+        .invoice-stamp-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            z-index: 1;
+        }
+        
+        .invoice-signature-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            z-index: 2;
+        }
+        
+        .invoice-stamp-image, .invoice-signature-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
         @keyframes fadeOut {
             0% { opacity: 1; }
             70% { opacity: 1; }
@@ -772,10 +823,19 @@
             </table>
         </div>
         
+        <!-- PO Signature and Stamp - exactly same position -->
         <div class="signature-stamp-container">
-            <div class="editable" data-id="signature-image-po"><img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" class="signature-image"></div>
-            <div class="editable" data-id="stamp-image-po"><img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="stamp-image"></div>
-            <div class="editable" data-id="signatory-text-po"><div class="authorized-signatory">Aiman Akhtar</div><div style="font-size:12px;color:#555;">Authorized Signatory</div><div style="font-size:11px;color:#777;">Opulence Group Indonesia</div></div>
+            <div class="stamp-wrapper">
+                <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="stamp-image">
+            </div>
+            <div class="signature-wrapper">
+                <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" class="signature-image">
+            </div>
+            <div class="authorized-signatory editable" data-id="signatory-text-po">
+                Aiman Akhtar<br>
+                <span style="font-size:12px;color:#555;">Authorized Signatory</span><br>
+                <span style="font-size:11px;color:#777;">Opulence Group Indonesia</span>
+            </div>
         </div>
     </div>
 
@@ -813,7 +873,6 @@
                 </ul>
             </div>
             
-            <!-- TERMS OF PAYMENT - All text 14px now -->
             <div class="invoice-payment-section">
                 <div class="invoice-payment-title editable" data-id="invoice-payment-title">TERMS OF PAYMENT</div>
                 <div class="invoice-payment-content">
@@ -827,8 +886,16 @@
             
             <div class="invoice-signature-section">
                 <div class="invoice-signature-box">
-                    <div class="editable" data-id="signature-image-invoice"><img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" style="width:150px;height:auto;filter:drop-shadow(1px 1px 2px rgba(0,0,0,0.1));margin-bottom:-25px;"></div>
-                    <div class="editable" data-id="stamp-image-invoice"><img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" style="width:180px;height:auto;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.2));margin-top:-30px;"></div>
+                    <!-- Invoice Signature and Stamp - exactly same position -->
+                    <div class="invoice-signature-stamp-container">
+                        <div class="invoice-stamp-wrapper">
+                            <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="invoice-stamp-image">
+                        </div>
+                        <div class="invoice-signature-wrapper">
+                            <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" class="invoice-signature-image">
+                        </div>
+                    </div>
+                    
                     <div class="invoice-signature-line"></div>
                     <div class="invoice-signature-text editable" data-id="invoice-signature-text">Aiman Akhtar</div>
                     <div class="invoice-authorized editable" data-id="invoice-authorized">Authorised Signatory</div>
@@ -880,7 +947,8 @@
                 productRowCount++;
                 const tbody = document.getElementById('productTableBody');
                 const row = document.createElement('tr');
-                ['code','description','quantity','unit','price'].forEach((type,i) => {
+                const types = ['code', 'description', 'quantity', 'unit', 'price'];
+                types.forEach(type => {
                     const td = document.createElement('td');
                     td.className = 'editable';
                     td.setAttribute('data-id', `product-${type}-${productRowCount}`);
