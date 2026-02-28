@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Order & Commercial Invoice - Opulence Group Indonesia</title>
-    <!-- jsPDF library for perfect PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- html2canvas for image download (unchanged) -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -21,84 +17,21 @@
             padding: 20px;
         }
         
-        /* A4 size container for perfect PDF export */
-        .container, .invoice-container {
-            max-width: 210mm; /* A4 width */
+        .container {
+            max-width: 900px;
             margin: 0 auto;
             background-color: white;
-            padding: 15mm 20mm; /* proper print margins */
+            padding: 30px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            page-break-after: always; /* for printing */
-            font-size: 12pt; /* base font size for PDF */
-            line-height: 1.5;
         }
         
-        /* Ensure all fonts match the TERMS OF PAYMENT style */
-        body, p, div, span, td, th, li, .editable {
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-        
-        /* Headers and titles keep original colors */
-        .po-title, .invoice-title {
-            font-size: 28px;
-            font-weight: bold;
-            color: #1e3a5f;
-        }
-        
-        /* Section headers */
-        .section-header, .invoice-payment-title, .invoice-terms-title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #1e3a5f;
-            text-decoration: underline;
-            margin-bottom: 15px;
-        }
-        
-        /* Payment terms specific styling - exactly as requested */
-        .invoice-payment-content strong {
-            font-size: 14px;
-            font-weight: bold;
-            color: #1e3a5f;
-            display: block;
-            margin-top: 12px;
-            margin-bottom: 4px;
-        }
-        
-        .invoice-payment-content div {
-            font-size: 12px;
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-        
-        /* First strong element doesn't need extra top margin */
-        .invoice-payment-content div:first-child strong {
-            margin-top: 0;
-        }
-        
-        /* Regular text styling */
-        .field-value, .shipping-value, .product-table td, .summary-table td, 
-        .invoice-detail-value, .list-text, .note-text, .company-info p {
-            font-size: 12px;
-            color: #333;
-        }
-        
-        /* Labels */
-        .field-label, .shipping-label, .po-detail-label, .invoice-detail-label {
-            font-size: 11px;
-            font-weight: bold;
-            color: #1e3a5f;
-        }
-        
-        /* Header section */
         .header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             border-bottom: 2px solid #1e3a5f;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
         }
         
         .logo-section {
@@ -122,7 +55,7 @@
         }
         
         .company-info {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.6;
         }
         
@@ -130,6 +63,10 @@
             font-size: 14px;
             margin-bottom: 8px;
             color: #1e3a5f;
+        }
+        
+        .company-info p {
+            color: #333;
         }
         
         .po-header {
@@ -154,7 +91,7 @@
         }
         
         .po-detail-item {
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-right: 1px solid white;
             font-size: 12px;
             font-weight: bold;
@@ -171,15 +108,15 @@
         }
         
         .po-detail-value {
-            font-size: 13px;
+            font-size: 14px;
         }
         
         .section-header {
             background-color: #1e3a5f;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 15px;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
@@ -196,7 +133,7 @@
         }
         
         .field-group {
-            padding: 12px;
+            padding: 15px;
             border-right: 1px solid #bfc9d4;
         }
         
@@ -208,15 +145,15 @@
             font-size: 11px;
             font-weight: bold;
             color: #1e3a5f;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
         
         .field-value {
-            font-size: 12px;
+            font-size: 13px;
             color: #333;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 1px solid #bfc9d4;
         }
         
@@ -229,7 +166,7 @@
         }
         
         .shipping-item {
-            padding: 10px 12px;
+            padding: 12px 15px;
             border-right: 1px solid #bfc9d4;
             font-size: 12px;
         }
@@ -242,11 +179,11 @@
             font-size: 10px;
             font-weight: bold;
             color: #1e3a5f;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
         
         .shipping-value {
-            font-size: 12px;
+            font-size: 13px;
             color: #333;
         }
         
@@ -260,7 +197,7 @@
         .product-table th {
             background-color: #1e3a5f;
             color: white;
-            padding: 10px;
+            padding: 12px 10px;
             text-align: left;
             font-size: 12px;
             font-weight: bold;
@@ -268,10 +205,14 @@
         }
         
         .product-table td {
-            padding: 10px;
+            padding: 12px 10px;
             border: 1px solid #bfc9d4;
             font-size: 12px;
             background-color: white;
+        }
+        
+        .product-table tr:hover td {
+            background-color: #f9f9f9;
         }
         
         .summary-section {
@@ -283,14 +224,14 @@
         
         .note-box {
             background-color: #d4e6f1;
-            padding: 12px;
+            padding: 15px;
             border-left: 4px solid #1e3a5f;
         }
         
         .note-label {
             font-weight: bold;
             color: #1e3a5f;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 12px;
         }
         
@@ -298,6 +239,13 @@
             font-size: 11px;
             color: #333;
             line-height: 1.5;
+        }
+        
+        .signature-box {
+            margin-top: 20px;
+            text-align: center;
+            color: #1e3a5f;
+            font-size: 11px;
         }
         
         .summary-table {
@@ -310,7 +258,7 @@
         }
         
         .summary-table td {
-            padding: 10px 12px;
+            padding: 12px 15px;
             font-size: 12px;
             border: 1px solid #bfc9d4;
         }
@@ -334,32 +282,34 @@
             font-weight: bold;
         }
         
-        /* Print styles for perfect PDF via browser */
+        /* Print styles - Buttons hide during print/download */
         @media print {
             body {
                 background-color: white;
                 padding: 0;
-                margin: 0;
             }
-            .container, .invoice-container {
+            .container {
                 max-width: 100%;
                 box-shadow: none;
-                margin: 0 auto;
-                padding: 15mm 20mm;
-                page-break-after: always;
+                margin-bottom: 0;
                 page-break-inside: avoid;
             }
             .invoice-container {
                 page-break-before: always;
+                margin-top: 50px;
             }
-            .add-product-btn, .add-invoice-btn, .button-container,
-            .invoice-button-container, .print-btn, .download-btn,
-            #printBtn, #downloadBtn, #pdfDownloadBtn {
+            .add-product-btn, 
+            .add-invoice-btn,
+            .button-container,
+            .invoice-button-container,
+            .print-btn,
+            .download-btn,
+            #printBtn,
+            #downloadBtn {
                 display: none !important;
             }
         }
 
-        /* Editable styles - unchanged */
         .editable {
             cursor: pointer;
             position: relative;
@@ -406,7 +356,6 @@
             line-height: 1.5;
         }
         
-        /* Button styles - keeping original download button exactly as before */
         .download-btn {
             position: fixed;
             bottom: 20px;
@@ -451,33 +400,9 @@
             background: #1e3a5f;
         }
         
-        /* New PDF download button - separate from image download */
-        .pdf-download-btn {
-            position: fixed;
-            bottom: 120px;
-            right: 20px;
-            background: #c44536;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            z-index: 100;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .pdf-download-btn:hover {
-            background: #a53326;
-        }
-        
         .status-message {
             position: fixed;
-            bottom: 170px;
+            bottom: 120px;
             right: 20px;
             background: #4CAF50;
             color: white;
@@ -527,14 +452,27 @@
             font-weight: bold;
         }
         
+        .invoice-container {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            overflow: hidden;
+        }
+
         .invoice-header {
             display: flex;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             border-bottom: 3px solid #1e3a5f;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
         }
-        
+
         .invoice-logo {
             width: 80px;
             height: 80px;
@@ -548,19 +486,57 @@
             font-weight: bold;
             font-size: 16px;
         }
-        
+
         .invoice-title {
             color: #1e3a5f;
             font-size: 28px;
             font-weight: bold;
             letter-spacing: 2px;
         }
-        
+
+        .invoice-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 4px solid #1e3a5f;
+            padding-left: 12px;
+        }
+
+        .invoice-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .invoice-detail-item {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-left: 3px solid #2d5a4f;
+            font-size: 14px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .invoice-detail-label {
+            font-weight: bold;
+            color: #1e3a5f;
+            min-width: 140px;
+            margin-right: 5px;
+        }
+
+        .invoice-detail-value {
+            color: #555;
+            flex: 1;
+        }
+
         .invoice-content-wrapper {
             position: relative;
-            min-height: auto;
+            min-height: 800px;
         }
-        
+
         .invoice-watermark {
             position: absolute;
             font-size: 60px;
@@ -578,131 +554,129 @@
             text-align: center;
             overflow: hidden;
         }
-        
-        .invoice-details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-        
-        .invoice-detail-item {
-            background-color: #f9f9f9;
-            padding: 10px 12px;
-            border-left: 3px solid #2d5a4f;
-            font-size: 12px;
-            display: flex;
-            align-items: baseline;
-        }
-        
-        .invoice-detail-label {
-            font-weight: bold;
-            color: #1e3a5f;
-            min-width: 130px;
-            margin-right: 5px;
-            font-size: 11px;
-        }
-        
-        .invoice-detail-value {
-            color: #555;
-            flex: 1;
-            font-size: 12px;
-        }
-        
+
         .invoice-terms-section {
-            margin-top: 25px;
-            margin-bottom: 25px;
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
-        
+
         .invoice-terms-title {
             font-size: 15px;
             font-weight: bold;
             color: #1e3a5f;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             text-decoration: underline;
         }
-        
+
         .invoice-terms-list {
             list-style: none;
             margin-left: 0;
             padding-left: 0;
         }
-        
+
         .invoice-terms-list li {
-            margin-bottom: 8px;
-            font-size: 12px;
+            margin-bottom: 10px;
+            font-size: 13px;
             color: #333;
             line-height: 1.5;
             display: flex;
             align-items: baseline;
         }
-        
+
+        .invoice-payment-section {
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .invoice-payment-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1e3a5f;
+            margin-bottom: 15px;
+            text-decoration: underline;
+        }
+
         .list-number {
             font-weight: bold;
             color: #1e3a5f;
             min-width: 25px;
             margin-right: 8px;
             display: inline-block;
-            font-size: 12px;
         }
-        
-        .list-text {
-            flex: 1;
-            font-size: 12px;
-        }
-        
-        .invoice-payment-section {
-            margin-top: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .invoice-payment-title {
-            font-size: 15px;
-            font-weight: bold;
-            color: #1e3a5f;
-            margin-bottom: 12px;
-            text-decoration: underline;
-        }
-        
+
         .invoice-signature-section {
             display: flex;
             justify-content: flex-end;
-            margin-top: 50px;
+            margin-top: 60px;
             text-align: center;
         }
-        
+
         .invoice-signature-box {
             width: 250px;
         }
-        
+
         .invoice-signature-line {
             border-top: 2px solid #333;
             margin-bottom: 5px;
             padding-top: 10px;
         }
-        
+
         .invoice-signature-text {
             font-size: 13px;
             color: #1e3a5f;
             font-weight: bold;
         }
-        
+
         .invoice-authorized {
             font-size: 12px;
             color: #555;
             margin-top: 5px;
         }
-        
+
         .invoice-footer {
             text-align: center;
-            margin-top: 35px;
-            padding-top: 15px;
+            margin-top: 40px;
+            padding-top: 20px;
             border-top: 1px solid #ddd;
-            font-size: 11px;
+            font-size: 12px;
             color: #999;
         }
         
-        .add-product-btn, .add-invoice-btn {
+        /* Add Product Button */
+        .add-product-btn {
+            background-color: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+            border: 1px solid #1e3a5f;
+        }
+        
+        .add-product-btn:hover {
+            background-color: #2d5a4f;
+            border-color: #2d5a4f;
+        }
+        
+        .add-product-btn i {
+            font-size: 14px;
+        }
+        
+        .button-container {
+            text-align: left;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        
+        /* Add New button for invoice details */
+        .add-invoice-btn {
             background-color: #1e3a5f;
             color: white;
             border: none;
@@ -711,6 +685,8 @@
             font-weight: bold;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 10px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -718,424 +694,904 @@
             border: 1px solid #1e3a5f;
         }
         
-        .add-product-btn:hover, .add-invoice-btn:hover {
+        .add-invoice-btn:hover {
             background-color: #2d5a4f;
             border-color: #2d5a4f;
         }
         
-        .button-container, .invoice-button-container {
-            text-align: left;
-            margin: 10px 0 15px 0;
+        .add-invoice-btn i {
+            font-size: 12px;
         }
         
+        .invoice-button-container {
+            text-align: left;
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+
         @keyframes fadeOut {
             0% { opacity: 1; }
             70% { opacity: 1; }
             100% { opacity: 0; display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .invoice-container {
+                padding: 30px;
+                margin: 10px;
+            }
+
+            .invoice-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .invoice-logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .invoice-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .invoice-watermark {
+                font-size: 35px;
+                letter-spacing: 3px;
+                width: 700px;
+                top: 30%;
+            }
+
+            .invoice-title {
+                font-size: 20px;
+            }
+            
+            .invoice-content-wrapper {
+                min-height: 600px;
+            }
+            
+            .stamp-image {
+                width: 150px;
+            }
+            
+            .signature-image {
+                width: 120px;
+            }
+            
+            .invoice-detail-item {
+                flex-direction: column;
+            }
+            
+            .invoice-detail-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <button class="print-btn" id="printBtn">
-        <i class="fas fa-print"></i> Print (PDF via Browser)
+        <i class="fas fa-print"></i> Print All
     </button>
     
-    <!-- Original download button - completely unchanged -->
     <a href="#" class="download-btn" id="downloadBtn">
         <i class="fas fa-download"></i> Download as Image
     </a>
     
-    <!-- New PDF download button (separate) -->
-    <button class="pdf-download-btn" id="pdfDownloadBtn">
-        <i class="fas fa-file-pdf"></i> Download Perfect PDF
-    </button>
-    
     <div class="status-message" id="statusMessage">Saved!</div>
 
-    <!-- Purchase Order Container - now A4 size optimized -->
+    <!-- Purchase Order Container - exactly as before -->
     <div class="container" id="purchaseOrder">
-        <!-- (Content unchanged - same as before) -->
         <div class="header">
             <div class="logo-section">
-                <div class="logo editable" data-id="logo-text">🌿 OGI</div>
+                <div class="logo editable" data-id="logo-text">
+                    🌿 OGI
+                </div>
                 <div class="company-info">
-                    <h3 class="editable" data-id="company-name">Opulence Group Indonesia</h3>
-                    <p class="editable" data-id="company-address"><strong>Global Trade & Investment Solutions</strong></p>
-                    <p class="editable" data-id="company-details">Tower Anugrah Floor 16 Office Garden E.3.8,<br>Mega Kuningan Area,<br>Dr. Ide Anak Agung Gde Street<br>+62 831-8271-8126</p>
+                    <h3 class="editable" data-id="company-name">
+                        Opulence Group Indonesia
+                    </h3>
+                    <p class="editable" data-id="company-address">
+                        <strong>Global Trade & Investment Solutions</strong>
+                    </p>
+                    <p class="editable" data-id="company-details">
+                        Tower Anugrah Floor 16 Office Garden E.3.8,<br>
+                        Mega Kuningan Area,<br>
+                        Dr. Ide Anak Agung Gde Street<br>
+                        +62 831-8271-8126
+                    </p>
                 </div>
             </div>
+            
             <div class="po-header">
-                <div class="po-title editable" data-id="po-title">PURCHASE ORDER</div>
+                <div class="po-title editable" data-id="po-title">
+                    PURCHASE ORDER
+                </div>
                 <div class="po-details">
-                    <div class="po-detail-item"><div class="po-detail-label editable" data-id="po-label">PO NUMBER</div><div class="po-detail-value editable" data-id="po-number">OGI001</div></div>
-                    <div class="po-detail-item"><div class="po-detail-label editable" data-id="date-label">DATE</div><div class="po-detail-value editable" data-id="po-date"><span id="currentDate"></span></div></div>
+                    <div class="po-detail-item">
+                        <div class="po-detail-label editable" data-id="po-label">
+                            PO NUMBER
+                        </div>
+                        <div class="po-detail-value editable" data-id="po-number">
+                            OGI001
+                        </div>
+                    </div>
+                    <div class="po-detail-item">
+                        <div class="po-detail-label editable" data-id="date-label">
+                            DATE
+                        </div>
+                        <div class="po-detail-value editable" data-id="po-date">
+                            <span id="currentDate">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="section-header"><span class="editable" data-id="importer-label">IMPORTER</span><span class="editable" data-id="exporter-label">EXPORTER</span></div>
+        <div class="section-header">
+            <span class="editable" data-id="importer-label">
+                IMPORTER
+            </span>
+            <span class="editable" data-id="exporter-label">
+                EXPORTER
+            </span>
+        </div>
         
         <div class="importer-exporter">
             <div class="field-group">
-                <div class="field-label editable" data-id="importer-name-label">Name</div><div class="field-value editable" data-id="importer-name">Opulence Group Indonesia</div>
-                <div class="field-label editable" data-id="importer-company-label">Company Name</div><div class="field-value editable" data-id="importer-company">Opulence Group Indonesia</div>
-                <div class="field-label editable" data-id="importer-address-label">Address</div><div class="field-value editable" data-id="importer-address">Tower Anugrah Floor 16 Office Garden E.3.8, Mega Kuningan Area, Dr. Ide Anak Agung Gde Street</div>
-                <div class="field-label editable" data-id="importer-phone-label">Phone</div><div class="field-value editable" data-id="importer-phone">+62 831-8271-8126</div>
-                <div class="field-label editable" data-id="importer-email-label">Email</div><div class="field-value editable" data-id="importer-email"><a href="mailto:purchase.opulencegroupindonesia@yahoo.com" style="color:#0066cc;text-decoration:underline;">purchase.opulencegroupindonesia@yahoo.com</a></div>
+                <div class="field-label editable" data-id="importer-name-label">
+                    Name
+                </div>
+                <div class="field-value editable" data-id="importer-name">
+                    Opulence Group Indonesia
+                </div>
+                
+                <div class="field-label editable" data-id="importer-company-label">
+                    Company Name
+                </div>
+                <div class="field-value editable" data-id="importer-company">
+                    Opulence Group Indonesia
+                </div>
+                
+                <div class="field-label editable" data-id="importer-address-label">
+                    Address
+                </div>
+                <div class="field-value editable" data-id="importer-address">
+                    Tower Anugrah Floor 16 Office Garden E.3.8, Mega Kuningan Area, Dr. Ide Anak Agung Gde Street
+                </div>
+                
+                <div class="field-label editable" data-id="importer-phone-label">
+                    Phone
+                </div>
+                <div class="field-value editable" data-id="importer-phone">
+                    +62 831-8271-8126
+                </div>
+                
+                <div class="field-label editable" data-id="importer-email-label">
+                    Email
+                </div>
+                <div class="field-value editable" data-id="importer-email">
+                    <a href="mailto:purchase.opulencegroupindonesia@yahoo.com" style="color: #0066cc; text-decoration: underline;">purchase.opulencegroupindonesia@yahoo.com</a>
+                </div>
             </div>
+            
             <div class="field-group">
-                <div class="field-label editable" data-id="exporter-name-label">Name</div><div class="field-value editable" data-id="exporter-name">SUVARNA SURESH PATIL</div>
-                <div class="field-label editable" data-id="exporter-company-label">Company Name</div><div class="field-value editable" data-id="exporter-company">SISVI AGRO SOLUTIONS</div>
-                <div class="field-label editable" data-id="exporter-address-label">Address</div><div class="field-value editable" data-id="exporter-address">80 / 626, Govt H Colony, Khokhara, Ahmedabad, Ahmedabad,Gujarat, 380008</div>
-                <div class="field-label editable" data-id="exporter-phone-label">Phone</div><div class="field-value editable" data-id="exporter-phone">9879945911</div>
-                <div class="field-label editable" data-id="exporter-email-label">Email</div><div class="field-value editable" data-id="exporter-email">sisviagro2018@gmail.com</div>
+                <div class="field-label editable" data-id="exporter-name-label">
+                    Name
+                </div>
+                <div class="field-value editable" data-id="exporter-name">
+                    SUVARNA SURESH PATIL
+                </div>
+                
+                <div class="field-label editable" data-id="exporter-company-label">
+                    Company Name
+                </div>
+                <div class="field-value editable" data-id="exporter-company">
+                    SISVI AGRO SOLUTIONS
+                </div>
+                
+                <div class="field-label editable" data-id="exporter-address-label">
+                    Address
+                </div>
+                <div class="field-value editable" data-id="exporter-address">
+                    80 / 626, Govt H Colony, Khokhara, Ahmedabad, Ahmedabad,Gujarat, 380008
+                </div>
+                
+                <div class="field-label editable" data-id="exporter-phone-label">
+                    Phone
+                </div>
+                <div class="field-value editable" data-id="exporter-phone">
+                    9879945911
+                </div>
+                
+                <div class="field-label editable" data-id="exporter-email-label">
+                    Email
+                </div>
+                <div class="field-value editable" data-id="exporter-email">
+                    sisviagro2018@gmail.com
+                </div>
             </div>
         </div>
         
         <div class="shipping-section">
-            <div class="shipping-item"><div class="shipping-label editable" data-id="shipping-terms-label">Shipping Terms</div><div class="shipping-value editable" data-id="shipping-terms">FOB</div><div class="shipping-value editable" data-id="shipping-location" style="margin-top:5px;">JNPT, (INDIA)</div></div>
-            <div class="shipping-item"><div class="shipping-label editable" data-id="shipping-method-label">Shipping Method</div><div class="shipping-value editable" data-id="shipping-method">FOR</div></div>
-            <div class="shipping-item"><div class="shipping-label editable" data-id="delivery-date-label">Delivery Date</div><div class="shipping-value editable" data-id="delivery-date">45 Days</div></div>
+            <div class="shipping-item">
+                <div class="shipping-label editable" data-id="shipping-terms-label">
+                    Shipping Terms
+                </div>
+                <div class="shipping-value editable" data-id="shipping-terms">
+                    FOB
+                </div>
+                <div class="shipping-value editable" data-id="shipping-location" style="margin-top: 8px;">
+                    JNPT, (INDIA)
+                </div>
+            </div>
+            <div class="shipping-item">
+                <div class="shipping-label editable" data-id="shipping-method-label">
+                    Shipping Method
+                </div>
+                <div class="shipping-value editable" data-id="shipping-method">
+                    FOR
+                </div>
+            </div>
+            <div class="shipping-item">
+                <div class="shipping-label editable" data-id="delivery-date-label">
+                    Delivery Date
+                </div>
+                <div class="shipping-value editable" data-id="delivery-date">
+                    45 Days
+                </div>
+            </div>
         </div>
         
+        <!-- Product Table -->
         <table class="product-table" id="productTable">
-            <thead><tr><th class="editable" data-id="product-code-header">Product Code</th><th class="editable" data-id="product-description-header">Product Description</th><th class="editable" data-id="quantity-header">Quantity</th><th class="editable" data-id="unit-header">Unit</th><th class="editable" data-id="price-header">Price</th></tr></thead>
+            <thead>
+                <tr>
+                    <th style="width: 15%;" class="editable" data-id="product-code-header">
+                        Product Code
+                    </th>
+                    <th style="width: 35%;" class="editable" data-id="product-description-header">
+                        Product Description
+                    </th>
+                    <th style="width: 15%;" class="editable" data-id="quantity-header">
+                        Quantity
+                    </th>
+                    <th style="width: 15%;" class="editable" data-id="unit-header">
+                        Unit
+                    </th>
+                    <th style="width: 20%;" class="editable" data-id="price-header">
+                        Price
+                    </th>
+                </tr>
+            </thead>
             <tbody id="productTableBody">
-                <tr><td class="editable" data-id="product-code-1">09103030</td><td class="editable" data-id="product-description-1">Bioplastash</td><td class="editable" data-id="product-quantity-1">700</td><td class="editable" data-id="product-unit-1">MT</td><td class="editable" data-id="product-price-1">$ 250.13 /MT</td></tr>
-                <tr><td class="editable" data-id="product-code-2"></td><td class="editable" data-id="product-description-2"></td><td class="editable" data-id="product-quantity-2"></td><td class="editable" data-id="product-unit-2"></td><td class="editable" data-id="product-price-2"></td></tr>
-                <tr><td class="editable" data-id="product-code-3"></td><td class="editable" data-id="product-description-3"></td><td class="editable" data-id="product-quantity-3"></td><td class="editable" data-id="product-unit-3"></td><td class="editable" data-id="product-price-3"></td></tr>
-                <tr><td class="editable" data-id="product-code-4"></td><td class="editable" data-id="product-description-4"></td><td class="editable" data-id="product-quantity-4"></td><td class="editable" data-id="product-unit-4"></td><td class="editable" data-id="product-price-4"></td></tr>
-                <tr><td class="editable" data-id="product-code-5"></td><td class="editable" data-id="product-description-5"></td><td class="editable" data-id="product-quantity-5"></td><td class="editable" data-id="product-unit-5"></td><td class="editable" data-id="product-price-5"></td></tr>
-                <tr><td class="editable" data-id="product-code-6"></td><td class="editable" data-id="product-description-6"></td><td class="editable" data-id="product-quantity-6"></td><td class="editable" data-id="product-unit-6"></td><td class="editable" data-id="product-price-6"></td></tr>
+                <tr>
+                    <td class="editable" data-id="product-code-1">
+                        09103030
+                    </td>
+                    <td class="editable" data-id="product-description-1">
+                        Bioplastash
+                    </td>
+                    <td class="editable" data-id="product-quantity-1">
+                        700
+                    </td>
+                    <td class="editable" data-id="product-unit-1">
+                        MT
+                    </td>
+                    <td class="editable" data-id="product-price-1">
+                        $ 250.13 /MT
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="product-code-2">
+                    </td>
+                    <td class="editable" data-id="product-description-2">
+                    </td>
+                    <td class="editable" data-id="product-quantity-2">
+                    </td>
+                    <td class="editable" data-id="product-unit-2">
+                    </td>
+                    <td class="editable" data-id="product-price-2">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="product-code-3">
+                    </td>
+                    <td class="editable" data-id="product-description-3">
+                    </td>
+                    <td class="editable" data-id="product-quantity-3">
+                    </td>
+                    <td class="editable" data-id="product-unit-3">
+                    </td>
+                    <td class="editable" data-id="product-price-3">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="product-code-4">
+                    </td>
+                    <td class="editable" data-id="product-description-4">
+                    </td>
+                    <td class="editable" data-id="product-quantity-4">
+                    </td>
+                    <td class="editable" data-id="product-unit-4">
+                    </td>
+                    <td class="editable" data-id="product-price-4">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="product-code-5">
+                    </td>
+                    <td class="editable" data-id="product-description-5">
+                    </td>
+                    <td class="editable" data-id="product-quantity-5">
+                    </td>
+                    <td class="editable" data-id="product-unit-5">
+                    </td>
+                    <td class="editable" data-id="product-price-5">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="product-code-6">
+                    </td>
+                    <td class="editable" data-id="product-description-6">
+                    </td>
+                    <td class="editable" data-id="product-quantity-6">
+                    </td>
+                    <td class="editable" data-id="product-unit-6">
+                    </td>
+                    <td class="editable" data-id="product-price-6">
+                    </td>
+                </tr>
             </tbody>
         </table>
         
-        <div class="button-container"><button class="add-product-btn" id="addProductBtn"><i class="fas fa-plus-circle"></i> Add New Product</button></div>
+        <!-- Add Product Button -->
+        <div class="button-container">
+            <button class="add-product-btn" id="addProductBtn">
+                <i class="fas fa-plus-circle"></i> Add New Product
+            </button>
+        </div>
         
         <div class="summary-section">
-            <div class="note-box"><div class="note-label editable" data-id="note-label">NOTE:</div><div class="note-text editable" data-id="note-text">THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>FALL OF MARKET PRICES FROM DATE OF ISSUE.</div></div>
+            <div class="note-box">
+                <div class="note-label editable" data-id="note-label">
+                    NOTE:
+                </div>
+                <div class="note-text editable" data-id="note-text">
+                    THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>
+                    FALL OF MARKET PRICES FROM DATE OF ISSUE.
+                </div>
+            </div>
+            
             <table class="summary-table">
-                <tr><td class="editable" data-id="subtotal-label">Subtotal ($)</td><td class="editable" data-id="subtotal-value">1,75,091.00</td></tr>
-                <tr><td class="editable" data-id="product-goods-label">Product (Goods) ($)</td><td class="editable" data-id="product-goods-value">1,75,091.00</td></tr>
-                <tr><td class="editable" data-id="tax-label">Tax ($)</td><td class="editable" data-id="tax-value">0.00</td></tr>
-                <tr><td class="editable" data-id="shipping-costs-label">Shipping costs ($)</td><td class="editable" data-id="shipping-costs-value">0.00</td></tr>
-                <tr class="total-row"><td class="editable" data-id="total-label">Total ($)</td><td class="editable" data-id="total-value">1,75,091.00</td></tr>
+                <tr>
+                    <td class="editable" data-id="subtotal-label">
+                        Subtotal ($)
+                    </td>
+                    <td class="editable" data-id="subtotal-value">
+                        1,75,091.00
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="product-goods-label">
+                        Product (Goods) ($)
+                    </td>
+                    <td class="editable" data-id="product-goods-value">
+                        1,75,091.00
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="tax-label">
+                        Tax ($)
+                    </td>
+                    <td class="editable" data-id="tax-value">
+                        0.00
+                    </td>
+                </tr>
+                <tr>
+                    <td class="editable" data-id="shipping-costs-label">
+                        Shipping costs ($)
+                    </td>
+                    <td class="editable" data-id="shipping-costs-value">
+                        0.00
+                    </td>
+                </tr>
+                <tr class="total-row">
+                    <td class="editable" data-id="total-label">
+                        Total ($)
+                    </td>
+                    <td class="editable" data-id="total-value">
+                        1,75,091.00
+                    </td>
+                </tr>
             </table>
         </div>
         
+        <!-- Authorised Signatory Section -->
         <div class="signature-stamp-container">
-            <div class="editable" data-id="signature-image-po"><img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" class="signature-image"></div>
-            <div class="editable" data-id="stamp-image-po"><img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="stamp-image"></div>
-            <div class="editable" data-id="signatory-text-po"><div class="authorized-signatory">Aiman Akhtar</div><div style="font-size:11px;color:#555;">Authorized Signatory</div><div style="font-size:10px;color:#777;">Opulence Group Indonesia</div></div>
+            <div class="editable" data-id="signature-image-po" style="display: inline-block; z-index: 2;">
+                <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
+                     alt="Authorized Signature" 
+                     class="signature-image">
+            </div>
+            
+            <div class="editable" data-id="stamp-image-po" style="display: inline-block; z-index: 1; margin-top: -30px;">
+                <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
+                     alt="Company Stamp" 
+                     class="stamp-image">
+            </div>
+            
+            <div class="editable" data-id="signatory-text-po" style="margin-top: 10px; text-align: center;">
+                <div class="authorized-signatory">Aiman Akhtar</div>
+                <div style="font-size: 11px; color: #555; margin-top: 5px;">Authorized Signatory</div>
+                <div style="font-size: 10px; color: #777; margin-top: 2px;">Opulence Group Indonesia</div>
+            </div>
         </div>
     </div>
 
-    <!-- Commercial Invoice Container - with exact TERMS OF PAYMENT styling -->
+    <!-- Commercial Invoice Container -->
     <div class="invoice-container" id="commercialInvoice">
         <div class="invoice-header">
-            <div class="invoice-logo editable" data-id="invoice-logo">OGI</div>
-            <div class="invoice-title editable" data-id="invoice-title">OPULENCE GROUP INDONESIA</div>
+            <div class="invoice-logo editable" data-id="invoice-logo">
+                OGI
+            </div>
+            <div class="invoice-title editable" data-id="invoice-title">
+                OPULENCE GROUP INDONESIA
+            </div>
         </div>
+
         <div class="invoice-content-wrapper">
-            <div class="invoice-watermark editable" data-id="invoice-watermark">OPULENCE GROUP</div>
-            
+            <div class="invoice-watermark editable" data-id="invoice-watermark">
+                OPULENCE GROUP
+            </div>
+
             <div class="invoice-details-grid" id="invoiceDetailsGrid">
-                <div class="invoice-detail-item editable" data-id="invoice-product"><span class="invoice-detail-label">Product:</span><span class="invoice-detail-value">Bioplastash</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-origin"><span class="invoice-detail-label">Origin:</span><span class="invoice-detail-value">INDIA</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-shipment"><span class="invoice-detail-label">Shipment:</span><span class="invoice-detail-value">FOB JNPT, India</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-quantity"><span class="invoice-detail-label">Quantity:</span><span class="invoice-detail-value">700 MT</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-destination"><span class="invoice-detail-label">Port of Destination:</span><span class="invoice-detail-value">Jakarta, INDONESIA</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-packaging"><span class="invoice-detail-label">Packaging:</span><span class="invoice-detail-value">25kg PP Bag</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-payment"><span class="invoice-detail-label">Payment:</span><span class="invoice-detail-value">90% Advanced, 10% against L/R</span></div>
-                <div class="invoice-detail-item editable" data-id="invoice-price"><span class="invoice-detail-label">Price:</span><span class="invoice-detail-value">$250.13 /MT</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-product">
+                    <span class="invoice-detail-label">Product:</span>
+                    <span class="invoice-detail-value">Bioplastash</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-origin">
+                    <span class="invoice-detail-label">Origin:</span>
+                    <span class="invoice-detail-value">INDIA</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-shipment">
+                    <span class="invoice-detail-label">Shipment:</span>
+                    <span class="invoice-detail-value">FOB JNPT, India</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-quantity">
+                    <span class="invoice-detail-label">Quantity:</span>
+                    <span class="invoice-detail-value">700 MT</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-destination">
+                    <span class="invoice-detail-label">Port of Destination:</span>
+                    <span class="invoice-detail-value">Jakarta, INDONESIA</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-packaging">
+                    <span class="invoice-detail-label">Packaging:</span>
+                    <span class="invoice-detail-value">25kg PP Bag</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-payment">
+                    <span class="invoice-detail-label">Payment:</span>
+                    <span class="invoice-detail-value">90% Advanced, 10% against L/R</span>
+                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-price">
+                    <span class="invoice-detail-label">Price:</span>
+                    <span class="invoice-detail-value">$250.13 /MT</span>
+                </div>
             </div>
             
-            <div class="invoice-button-container"><button class="add-invoice-btn" id="addInvoiceDetailBtn"><i class="fas fa-plus-circle"></i> Add New</button></div>
-            
+            <!-- Add New Button for Invoice Details -->
+            <div class="invoice-button-container">
+                <button class="add-invoice-btn" id="addInvoiceDetailBtn">
+                    <i class="fas fa-plus-circle"></i> Add New
+                </button>
+            </div>
+
             <div class="invoice-terms-section">
-                <div class="invoice-terms-title editable" data-id="invoice-terms-title">Importer Terms & Condition</div>
+                <div class="invoice-terms-title editable" data-id="invoice-terms-title">
+                    Importer Terms & Condition
+                </div>
                 <ul class="invoice-terms-list" id="termsList">
-                    <li class="editable" data-id="invoice-term-1"><span class="list-number">1.</span><span class="list-text">Seller will be paying all the logistic charges from warehouse to Port.</span></li>
-                    <li class="editable" data-id="invoice-term-2"><span class="list-number">2.</span><span class="list-text">Seller should be experienced in this commodity</span></li>
-                    <li class="editable" data-id="invoice-term-3"><span class="list-number">3.</span><span class="list-text">Seller should be BPOM or US FDA registered as well as their country's registration for export.</span></li>
-                    <li class="editable" data-id="invoice-term-4"><span class="list-number">4.</span><span class="list-text">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</span></li>
-                    <li class="editable" data-id="invoice-term-5"><span class="list-number">5.</span><span class="list-text">Partially shipment allowed but not more than 3.</span></li>
-                    <li class="editable" data-id="invoice-term-6"><span class="list-number">6.</span><span class="list-text">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</span></li>
+                    <li class="editable" data-id="invoice-term-1">
+                        <span class="list-number editable" data-id="invoice-term-1-number">1.</span>
+                        <span class="list-text">Seller will be paying all the logistic charges from warehouse to Port.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-2">
+                        <span class="list-number editable" data-id="invoice-term-2-number">2.</span>
+                        <span class="list-text">Seller should be experienced in this commodity</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-3">
+                        <span class="list-number editable" data-id="invoice-term-3-number">3.</span>
+                        <span class="list-text">Seller should be BPOM or US FDA registered as well as their country's registration for export.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-4">
+                        <span class="list-number editable" data-id="invoice-term-4-number">4.</span>
+                        <span class="list-text">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-5">
+                        <span class="list-number editable" data-id="invoice-term-5-number">5.</span>
+                        <span class="list-text">Partially shipment allowed but not more than 3.</span>
+                    </li>
+                    <li class="editable" data-id="invoice-term-6">
+                        <span class="list-number editable" data-id="invoice-term-6-number">6.</span>
+                        <span class="list-text">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</span>
+                    </li>
                 </ul>
             </div>
-            
-            <!-- PAYMENT TERMS SECTION - EXACT STYLING AS REQUESTED -->
+
+            <!-- New Payment Terms Section (with proper left alignment) -->
             <div class="invoice-payment-section">
-                <div class="invoice-payment-title editable" data-id="invoice-payment-title">TERMS OF PAYMENT</div>
-                <div class="invoice-payment-content">
-                    <div class="editable" data-id="invoice-payment-advance"><strong>Advance Payment</strong><br>An advance payment of fifty percent (50%) of the total order value shall be released by the Buyer immediately upon acceptance of the Purchase Order (PO) to secure the order and reserve production capacity.</div>
-                    <div class="editable" data-id="invoice-payment-production"><strong>Commencement of Production</strong><br>Production shall commence strictly upon receipt of the aforesaid advance payment. All goods shall be freshly manufactured exclusively for this order.</div>
-                    <div class="editable" data-id="invoice-payment-balance"><strong>Balance Payment</strong><br>The remaining fifty percent (50%) of the total order value shall be payable by the Buyer against receipt of scanned copies of the Bill of Lading (BL) and/or relevant shipping documents.</div>
-                    <div class="editable" data-id="invoice-payment-obligation"><strong>Payment Obligation</strong><br>The Buyer undertakes and agrees to make all payments in a timely manner in accordance with these terms, ensuring smooth execution of the order and continuity of business between the parties.</div>
-                    <div class="editable" data-id="invoice-payment-future"><strong>Future Business</strong><br>Subject to successful execution of this shipment and compliance with the above payment terms, repeat orders and increased order volumes may be mutually considered.</div>
+                <div class="invoice-payment-title editable" data-id="invoice-payment-title">
+                    TERMS OF PAYMENT
+                </div>
+                <div class="invoice-payment-content" style="margin-top: 15px; text-align: left;">
+                    <div class="editable" data-id="invoice-payment-advance" style="margin-bottom: 15px; text-align: left;">
+                        <strong>Advance Payment</strong><br>
+                        An advance payment of fifty percent (50%) of the total order value shall be released by the Buyer immediately upon acceptance of the Purchase Order (PO) to secure the order and reserve production capacity.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-production" style="margin-bottom: 15px; text-align: left;">
+                        <strong>Commencement of Production</strong><br>
+                        Production shall commence strictly upon receipt of the aforesaid advance payment. All goods shall be freshly manufactured exclusively for this order.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-balance" style="margin-bottom: 15px; text-align: left;">
+                        <strong>Balance Payment</strong><br>
+                        The remaining fifty percent (50%) of the total order value shall be payable by the Buyer against receipt of scanned copies of the Bill of Lading (BL) and/or relevant shipping documents.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-obligation" style="margin-bottom: 15px; text-align: left;">
+                        <strong>Payment Obligation</strong><br>
+                        The Buyer undertakes and agrees to make all payments in a timely manner in accordance with these terms, ensuring smooth execution of the order and continuity of business between the parties.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-future" style="text-align: left;">
+                        <strong>Future Business</strong><br>
+                        Subject to successful execution of this shipment and compliance with the above payment terms, repeat orders and increased order volumes may be mutually considered.
+                    </div>
                 </div>
             </div>
-            
+
             <div class="invoice-signature-section">
                 <div class="invoice-signature-box">
-                    <div class="editable" data-id="signature-image-invoice"><img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" style="width:150px;height:auto;filter:drop-shadow(1px 1px 2px rgba(0,0,0,0.1));margin-bottom:-25px;"></div>
-                    <div class="editable" data-id="stamp-image-invoice"><img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" style="width:180px;height:auto;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.2));margin-top:-30px;"></div>
-                    <div class="invoice-signature-line"></div>
-                    <div class="invoice-signature-text editable" data-id="invoice-signature-text">Aiman Akhtar</div>
-                    <div class="invoice-authorized editable" data-id="invoice-authorized">Authorised Signatory</div>
-                    <div style="font-size:11px;color:#777;">Opulence Group Indonesia</div>
+                    <div class="editable" data-id="signature-image-invoice" style="text-align: center; margin-bottom: -25px; z-index: 2;">
+                        <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
+                             alt="Authorized Signature" 
+                             style="width: 150px; height: auto; filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));">
+                    </div>
+                    
+                    <div class="editable" data-id="stamp-image-invoice" style="text-align: center; z-index: 1;">
+                        <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
+                             alt="Company Stamp" 
+                             style="width: 180px; height: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2)); margin-top: -30px;">
+                    </div>
+                    
+                    <div class="invoice-signature-line" style="margin-top: 10px;"></div>
+                    <div class="invoice-signature-text editable" data-id="invoice-signature-text">
+                        Aiman Akhtar
+                    </div>
+                    <div class="invoice-authorized editable" data-id="invoice-authorized">
+                        Authorised Signatory
+                    </div>
+                    <div style="font-size: 11px; color: #777; margin-top: 5px;">
+                        Opulence Group Indonesia
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="invoice-footer editable" data-id="invoice-footer"><p>© 2024 Opulence Group Indonesia. All rights reserved. | Commercial Invoice</p></div>
+
+        <div class="invoice-footer editable" data-id="invoice-footer">
+            <p>&copy; 2024 Opulence Group Indonesia. All rights reserved. | Commercial Invoice</p>
+        </div>
     </div>
 
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
     <script>
-        (function() {
-            // Set current date
-            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-GB');
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-GB');
+            document.getElementById('currentDate').textContent = formattedDate;
             
-            // ========== EDITOR FUNCTIONALITY (unchanged) ==========
-            let productRowCount = 6;
-            let invoiceDetailCount = 8;
-            
-            function setupAddProductButton() {
-                document.getElementById('addProductBtn')?.addEventListener('click', function() {
-                    productRowCount++;
-                    const tbody = document.getElementById('productTableBody');
-                    const newRow = document.createElement('tr');
-                    ['code','description','quantity','unit','price'].forEach((type,i) => {
-                        const td = document.createElement('td');
-                        td.className = 'editable';
-                        td.setAttribute('data-id', `product-${type}-${productRowCount}`);
-                        td.textContent = '';
-                        newRow.appendChild(td);
-                    });
-                    tbody.appendChild(newRow);
-                    attachEditableListenersToElement(newRow);
-                    showStatus('New product row added!');
-                });
-            }
-            
-            function setupAddInvoiceDetailButton() {
-                document.getElementById('addInvoiceDetailBtn')?.addEventListener('click', function() {
-                    invoiceDetailCount++;
-                    const grid = document.getElementById('invoiceDetailsGrid');
-                    const newItem = document.createElement('div');
-                    newItem.className = 'invoice-detail-item editable';
-                    newItem.setAttribute('data-id', `invoice-detail-${invoiceDetailCount}`);
-                    newItem.innerHTML = `<span class="invoice-detail-label editable" data-id="invoice-detail-label-${invoiceDetailCount}">New Label:</span><span class="invoice-detail-value editable" data-id="invoice-detail-value-${invoiceDetailCount}">New Value</span>`;
-                    grid.appendChild(newItem);
-                    attachEditableListenersToElement(newItem);
-                    showStatus('New detail added!');
-                });
-            }
-            
-            function attachEditableListenersToElement(element) {
-                element.querySelectorAll('.editable').forEach(el => {
-                    el.dataset.original = el.innerHTML;
-                    el.removeEventListener('click', startEditing);
-                    el.addEventListener('click', startEditing);
-                });
-            }
-            
-            function startEditing(e) {
-                e.stopPropagation();
-                const element = this;
-                const current = document.querySelector('.editing');
-                if (current && current !== element) saveEdit(current);
-                
-                element.classList.add('editing');
-                let content = element.textContent;
-                
-                if (element.tagName === 'A' || element.querySelector('a')) {
-                    const link = element.tagName === 'A' ? element : element.querySelector('a');
-                    content = link.textContent;
-                    element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
-                } else if (element.classList.contains('note-text') || element.classList.contains('company-details') || element.textContent.length > 100) {
-                    element.innerHTML = `<textarea class="edit-textarea">${content}</textarea>`;
-                    const ta = element.querySelector('textarea');
-                    ta.style.height = Math.max(80, ta.scrollHeight) + 'px';
-                    ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.max(80, this.scrollHeight) + 'px'; });
-                } else {
-                    element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
-                }
-                
-                const input = element.querySelector('input, textarea');
-                if (input) { input.focus(); input.select(); input.addEventListener('blur', () => saveEdit(element)); }
-            }
-            
-            function saveEdit(element) {
-                const input = element.querySelector('.edit-input, .edit-textarea');
-                if (!input) return;
-                let val = input.value.trim();
-                if (input.matches('textarea')) {
-                    element.innerHTML = val.replace(/\n/g, '<br>');
-                } else if (element.dataset.id === 'importer-email') {
-                    element.innerHTML = `<a href="mailto:${val}" style="color:#0066cc;text-decoration:underline;">${val}</a>`;
-                } else {
-                    element.textContent = val;
-                }
-                element.classList.remove('editing');
-                element.dataset.original = element.innerHTML;
-                showStatus('Saved!');
-            }
-            
-            document.querySelectorAll('.editable').forEach(el => {
-                el.dataset.original = el.innerHTML;
-                el.addEventListener('click', startEditing);
-            });
-            
-            document.addEventListener('click', e => {
-                if (!e.target.closest('.editable')) {
-                    const ed = document.querySelector('.editing');
-                    if (ed) saveEdit(ed);
-                }
-            });
-            
-            document.addEventListener('keydown', e => {
-                const ed = document.querySelector('.editing');
-                if (!ed) return;
-                if (e.key === 'Enter' && !e.shiftKey && !e.target.matches('textarea')) { e.preventDefault(); saveEdit(ed); }
-                if (e.key === 'Escape') { e.preventDefault(); ed.innerHTML = ed.dataset.original; ed.classList.remove('editing'); }
-            });
-            
+            setupDirectEditor();
+            setupButtons();
             setupAddProductButton();
             setupAddInvoiceDetailButton();
+        });
+        
+        // Track product row count
+        let productRowCount = 6;
+        
+        // Track invoice detail count
+        let invoiceDetailCount = 8;
+        
+        function setupAddProductButton() {
+            const addBtn = document.getElementById('addProductBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    addNewProductRow();
+                });
+            }
+        }
+        
+        function setupAddInvoiceDetailButton() {
+            const addBtn = document.getElementById('addInvoiceDetailBtn');
+            if (addBtn) {
+                addBtn.addEventListener('click', function() {
+                    addNewInvoiceDetail();
+                });
+            }
+        }
+        
+        function addNewInvoiceDetail() {
+            invoiceDetailCount++;
+            const grid = document.getElementById('invoiceDetailsGrid');
             
-            // ========== ORIGINAL DOWNLOAD AS IMAGE (COMPLETELY UNCHANGED) ==========
+            // Create new detail item
+            const newItem = document.createElement('div');
+            newItem.className = 'invoice-detail-item editable';
+            newItem.setAttribute('data-id', `invoice-detail-${invoiceDetailCount}`);
+            
+            // Random label
+            const labels = ['Custom Label:', 'Additional Info:', 'Reference:', 'Notes:', 'Special:'];
+            const randomLabel = labels[Math.floor(Math.random() * labels.length)];
+            
+            newItem.innerHTML = `
+                <span class="invoice-detail-label editable" data-id="invoice-detail-label-${invoiceDetailCount}">${randomLabel}</span>
+                <span class="invoice-detail-value editable" data-id="invoice-detail-value-${invoiceDetailCount}">New Detail</span>
+            `;
+            
+            grid.appendChild(newItem);
+            
+            // Make new item editable
+            attachEditableListenersToElement(newItem);
+            
+            showStatus('New detail added!');
+        }
+        
+        function addNewProductRow() {
+            productRowCount++;
+            const tbody = document.getElementById('productTableBody');
+            
+            // Create new row
+            const newRow = document.createElement('tr');
+            
+            // Create cells
+            const cells = [
+                { type: 'td', className: 'editable', dataId: `product-code-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-description-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-quantity-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-unit-${productRowCount}`, content: '' },
+                { type: 'td', className: 'editable', dataId: `product-price-${productRowCount}`, content: '' }
+            ];
+            
+            cells.forEach(cell => {
+                const td = document.createElement(cell.type);
+                td.className = cell.className;
+                td.setAttribute('data-id', cell.dataId);
+                td.textContent = cell.content;
+                newRow.appendChild(td);
+            });
+            
+            tbody.appendChild(newRow);
+            
+            // Attach editable listeners
+            attachEditableListenersToElement(newRow);
+            
+            showStatus('New product row added!');
+        }
+        
+        function attachEditableListenersToElement(element) {
+            const editableElements = element.querySelectorAll('.editable');
+            editableElements.forEach(el => {
+                el.dataset.original = el.innerHTML;
+                
+                el.removeEventListener('click', startDirectEditingHandler);
+                el.addEventListener('click', startDirectEditingHandler);
+            });
+        }
+        
+        // Handler function
+        function startDirectEditingHandler(e) {
+            e.stopPropagation();
+            startDirectEditing(this);
+        }
+        
+        function setupDirectEditor() {
+            const editableElements = document.querySelectorAll('.editable');
+            
+            editableElements.forEach(element => {
+                element.dataset.original = element.innerHTML;
+                
+                element.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    startDirectEditing(this);
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.editable')) {
+                    const editingElement = document.querySelector('.editing');
+                    if (editingElement) {
+                        saveDirectEdit(editingElement);
+                    }
+                }
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                const editingElement = document.querySelector('.editing');
+                if (editingElement) {
+                    if (e.key === 'Enter' && !e.shiftKey && !e.target.matches('textarea')) {
+                        e.preventDefault();
+                        saveDirectEdit(editingElement);
+                    }
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        cancelDirectEdit(editingElement);
+                    }
+                }
+            });
+        }
+        
+        function startDirectEditing(element) {
+            const currentEditing = document.querySelector('.editing');
+            if (currentEditing && currentEditing !== element) {
+                saveDirectEdit(currentEditing);
+            }
+            
+            element.classList.add('editing');
+            
+            let content = '';
+            if (element.tagName === 'A' || element.querySelector('a')) {
+                const link = element.tagName === 'A' ? element : element.querySelector('a');
+                content = link.textContent;
+                element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
+            } else if (element.classList.contains('note-text') || 
+                      element.classList.contains('company-details') ||
+                      element.classList.contains('invoice-detail-value') ||
+                      (element.classList.contains('field-value') && element.textContent.length > 50) ||
+                      element.querySelector('strong')) {
+                content = element.textContent;
+                element.innerHTML = `<textarea class="edit-textarea">${content}</textarea>`;
+                
+                const textarea = element.querySelector('.edit-textarea');
+                textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
+                
+                textarea.addEventListener('input', function() {
+                    this.style.height = 'auto';
+                    this.style.height = Math.max(80, this.scrollHeight) + 'px';
+                });
+            } else {
+                content = element.textContent;
+                element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
+            }
+            
+            const input = element.querySelector('.edit-input, .edit-textarea');
+            if (input) {
+                input.focus();
+                input.select();
+                
+                input.addEventListener('blur', function() {
+                    saveDirectEdit(element);
+                });
+            }
+        }
+        
+        function saveDirectEdit(element) {
+            const input = element.querySelector('.edit-input, .edit-textarea');
+            if (!input) return;
+            
+            let newValue = input.value.trim();
+            
+            if (input.matches('textarea')) {
+                // Preserve line breaks
+                const displayValue = newValue.replace(/\n/g, '<br>');
+                element.innerHTML = displayValue;
+            } 
+            else if (element.dataset.id === 'importer-email' || element.dataset.id === 'exporter-email') {
+                if (element.dataset.id === 'importer-email') {
+                    element.innerHTML = `<a href="mailto:${newValue}" style="color: #0066cc; text-decoration: underline;">${newValue}</a>`;
+                } else {
+                    element.innerHTML = newValue;
+                }
+            } 
+            else {
+                element.textContent = newValue;
+            }
+            
+            element.classList.remove('editing');
+            showStatus('Saved!');
+            
+            element.dataset.original = element.innerHTML;
+        }
+        
+        function cancelDirectEdit(element) {
+            element.innerHTML = element.dataset.original || '';
+            element.classList.remove('editing');
+        }
+        
+        function setupButtons() {
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
             document.getElementById('downloadBtn').addEventListener('click', function(e) {
                 e.preventDefault();
-                showStatus('Creating high-res images...');
-                
-                const po = document.getElementById('purchaseOrder');
-                const inv = document.getElementById('commercialInvoice');
-                const addBtn = document.querySelector('.button-container');
-                const invBtn = document.querySelector('.invoice-button-container');
-                if (addBtn) addBtn.style.visibility = 'hidden';
-                if (invBtn) invBtn.style.visibility = 'hidden';
-                
-                html2canvas(po, { scale: 4, useCORS: true, backgroundColor: '#ffffff' }).then(poCanvas => {
-                    html2canvas(inv, { scale: 4, useCORS: true, backgroundColor: '#ffffff' }).then(invCanvas => {
-                        if (addBtn) addBtn.style.visibility = 'visible';
-                        if (invBtn) invBtn.style.visibility = 'visible';
-                        
-                        const date = new Date().toISOString().split('T')[0];
-                        
-                        poCanvas.toBlob(blob => {
-                            const link = document.createElement('a');
-                            link.href = URL.createObjectURL(blob);
-                            link.download = `Purchase_Order_OGI_${date}.png`;
-                            link.click();
-                            URL.revokeObjectURL(link.href);
-                        }, 'image/png');
-                        
-                        setTimeout(() => {
-                            invCanvas.toBlob(blob => {
-                                const link = document.createElement('a');
-                                link.href = URL.createObjectURL(blob);
-                                link.download = `Commercial_Invoice_OGI_${date}.png`;
-                                link.click();
-                                URL.revokeObjectURL(link.href);
-                                showStatus('Images downloaded!');
-                            }, 'image/png');
-                        }, 500);
-                    }).catch(() => { if(addBtn) addBtn.style.visibility='visible'; if(invBtn) invBtn.style.visibility='visible'; });
-                }).catch(() => { if(addBtn) addBtn.style.visibility='visible'; if(invBtn) invBtn.style.visibility='visible'; });
+                downloadAllAsImages();
             });
+        }
+        
+        function downloadAllAsImages() {
+            showStatus('Creating images...');
             
-            // ========== PERFECT PDF DOWNLOAD (NEW - A4 SIZE) ==========
-            document.getElementById('pdfDownloadBtn').addEventListener('click', function() {
-                showStatus('Generating perfect PDF...');
-                
-                const { jsPDF } = window.jspdf;
-                
-                // Create two PDFs (one for PO, one for Invoice) or combine? We'll do separate for clarity
-                const poElement = document.getElementById('purchaseOrder');
-                const invElement = document.getElementById('commercialInvoice');
-                
-                // Hide buttons during capture
-                const addBtn = document.querySelector('.button-container');
-                const invBtn = document.querySelector('.invoice-button-container');
-                if (addBtn) addBtn.style.visibility = 'hidden';
-                if (invBtn) invBtn.style.visibility = 'hidden';
-                
-                // Capture PO
-                html2canvas(poElement, { 
-                    scale: 2, 
-                    useCORS: true, 
-                    backgroundColor: '#ffffff',
+            const poElement = document.getElementById('purchaseOrder');
+            const invoiceElement = document.getElementById('commercialInvoice');
+            
+            // Temporarily hide buttons for screenshot
+            const addProductBtn = document.querySelector('.button-container');
+            const addInvoiceBtn = document.querySelector('.invoice-button-container');
+            
+            if (addProductBtn) addProductBtn.style.visibility = 'hidden';
+            if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'hidden';
+            
+            html2canvas(poElement, {
+                scale: 4,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff',
+                allowTaint: true
+            }).then(poCanvas => {
+                html2canvas(invoiceElement, {
+                    scale: 4,
+                    useCORS: true,
                     logging: false,
-                    windowWidth: 210 * 3.78 // approximate A4 width in pixels at 96dpi
-                }).then(poCanvas => {
-                    // Capture Invoice
-                    html2canvas(invElement, { 
-                        scale: 2, 
-                        useCORS: true, 
-                        backgroundColor: '#ffffff',
-                        logging: false,
-                        windowWidth: 210 * 3.78
-                    }).then(invCanvas => {
-                        if (addBtn) addBtn.style.visibility = 'visible';
-                        if (invBtn) invBtn.style.visibility = 'visible';
+                    backgroundColor: '#ffffff',
+                    allowTaint: true
+                }).then(invoiceCanvas => {
+                    // Show buttons back
+                    if (addProductBtn) addProductBtn.style.visibility = 'visible';
+                    if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
+                    
+                    const poImage = poCanvas.toDataURL('image/png');
+                    const invoiceImage = invoiceCanvas.toDataURL('image/png');
+                    
+                    const poLink = document.createElement('a');
+                    const date = new Date().toISOString().split('T')[0];
+                    poLink.download = `Purchase_Order_OGI_${date}.png`;
+                    poLink.href = poImage;
+                    poLink.click();
+                    
+                    setTimeout(() => {
+                        const invoiceLink = document.createElement('a');
+                        invoiceLink.download = `Commercial_Invoice_OGI_${date}.png`;
+                        invoiceLink.href = invoiceImage;
+                        invoiceLink.click();
                         
-                        const imgDataPO = poCanvas.toDataURL('image/png');
-                        const imgDataInv = invCanvas.toDataURL('image/png');
-                        
-                        // Calculate A4 dimensions in mm (210x297)
-                        const pdfWidth = 210; // mm
-                        const pdfHeight = 297; // mm
-                        
-                        // Calculate canvas aspect ratios
-                        const poRatio = poCanvas.height / poCanvas.width;
-                        const invRatio = invCanvas.height / invCanvas.width;
-                        
-                        // PO PDF
-                        const pdfPO = new jsPDF({
-                            orientation: poRatio > 1.4 ? 'portrait' : 'portrait',
-                            unit: 'mm',
-                            format: 'a4'
-                        });
-                        
-                        const poImgWidth = pdfWidth;
-                        const poImgHeight = (poCanvas.height * pdfWidth) / poCanvas.width;
-                        
-                        pdfPO.addImage(imgDataPO, 'PNG', 0, 0, poImgWidth, poImgHeight, undefined, 'FAST');
-                        
-                        // Invoice PDF
-                        const pdfInv = new jsPDF({
-                            orientation: invRatio > 1.4 ? 'portrait' : 'portrait',
-                            unit: 'mm',
-                            format: 'a4'
-                        });
-                        
-                        const invImgWidth = pdfWidth;
-                        const invImgHeight = (invCanvas.height * pdfWidth) / invCanvas.width;
-                        
-                        pdfInv.addImage(imgDataInv, 'PNG', 0, 0, invImgWidth, invImgHeight, undefined, 'FAST');
-                        
-                        // Save both
-                        const date = new Date().toISOString().split('T')[0];
-                        pdfPO.save(`Purchase_Order_OGI_${date}.pdf`);
-                        setTimeout(() => {
-                            pdfInv.save(`Commercial_Invoice_OGI_${date}.pdf`);
-                            showStatus('Perfect PDFs created!');
-                        }, 500);
-                    }).catch(() => { if(addBtn) addBtn.style.visibility='visible'; if(invBtn) invBtn.style.visibility='visible'; });
-                }).catch(() => { if(addBtn) addBtn.style.visibility='visible'; if(invBtn) invBtn.style.visibility='visible'; });
+                        showStatus('Both images downloaded!');
+                    }, 500);
+                    
+                }).catch(error => {
+                    // Show buttons back in case of error
+                    if (addProductBtn) addProductBtn.style.visibility = 'visible';
+                    if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
+                    console.error('Error creating invoice image:', error);
+                    showStatus('Error creating images');
+                });
+            }).catch(error => {
+                // Show buttons back in case of error
+                if (addProductBtn) addProductBtn.style.visibility = 'visible';
+                if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
+                console.error('Error creating PO image:', error);
+                showStatus('Error creating images');
             });
+        }
+        
+        function showStatus(message) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = message;
+            statusEl.classList.add('show');
             
-            // Print button (uses browser's print -> save as PDF is perfect)
-            document.getElementById('printBtn').addEventListener('click', () => window.print());
-            
-            function showStatus(msg) {
-                const el = document.getElementById('statusMessage');
-                el.textContent = msg;
-                el.classList.add('show');
-                setTimeout(() => el.classList.remove('show'), 3000);
-            }
-        })();
+            setTimeout(() => {
+                statusEl.classList.remove('show');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
