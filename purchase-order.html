@@ -26,6 +26,15 @@
             margin-bottom: 30px;
         }
         
+        /* Full width mode for download */
+        .container.full-width-mode, .invoice-container.full-width-mode {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 30px 40px !important;
+            box-shadow: none !important;
+        }
+        
         .header {
             display: flex;
             justify-content: space-between;
@@ -745,7 +754,7 @@
     </button>
     
     <a href="#" class="download-btn" id="downloadBtn">
-        <i class="fas fa-download"></i> Download as Image
+        <i class="fas fa-download"></i> Download HD Full Width Image
     </a>
     
     <div class="status-message" id="statusMessage">Saved!</div>
@@ -964,44 +973,93 @@
             // Print button
             document.getElementById('printBtn').addEventListener('click', () => window.print());
             
-            // Download image button
-            document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            // Download HD Full Width Image button
+            document.getElementById('downloadBtn').addEventListener('click', async function(e) {
                 e.preventDefault();
-                showStatus('Creating images...');
+                showStatus('Creating HD full width image...');
                 
                 const po = document.getElementById('purchaseOrder');
                 const inv = document.getElementById('commercialInvoice');
                 const btn1 = document.querySelector('.button-container');
                 const btn2 = document.querySelector('.invoice-button-container');
                 
+                // Hide buttons
                 if (btn1) btn1.style.visibility = 'hidden';
                 if (btn2) btn2.style.visibility = 'hidden';
                 
-                html2canvas(po, { scale: 4, useCORS: true, backgroundColor: '#ffffff' }).then(poCanvas => {
-                    html2canvas(inv, { scale: 4, useCORS: true, backgroundColor: '#ffffff' }).then(invCanvas => {
-                        if (btn1) btn1.style.visibility = 'visible';
-                        if (btn2) btn2.style.visibility = 'visible';
-                        
-                        const date = new Date().toISOString().split('T')[0];
-                        
-                        poCanvas.toBlob(blob => {
+                // Save original styles
+                const poOriginalClass = po.className;
+                const invOriginalClass = inv.className;
+                
+                // Apply full width mode
+                po.classList.add('full-width-mode');
+                inv.classList.add('full-width-mode');
+                
+                try {
+                    // Capture PO with HD settings - scale 6 for maximum quality
+                    const poCanvas = await html2canvas(po, { 
+                        scale: 6, 
+                        useCORS: true, 
+                        backgroundColor: '#ffffff',
+                        logging: false,
+                        allowTaint: true,
+                        imageTimeout: 0,
+                        windowWidth: po.scrollWidth,
+                        windowHeight: po.scrollHeight
+                    });
+                    
+                    // Capture Invoice with HD settings
+                    const invCanvas = await html2canvas(inv, { 
+                        scale: 6, 
+                        useCORS: true, 
+                        backgroundColor: '#ffffff',
+                        logging: false,
+                        allowTaint: true,
+                        imageTimeout: 0,
+                        windowWidth: inv.scrollWidth,
+                        windowHeight: inv.scrollHeight
+                    });
+                    
+                    // Restore original styles
+                    po.className = poOriginalClass;
+                    inv.className = invOriginalClass;
+                    
+                    // Show buttons back
+                    if (btn1) btn1.style.visibility = 'visible';
+                    if (btn2) btn2.style.visibility = 'visible';
+                    
+                    const date = new Date().toISOString().split('T')[0];
+                    
+                    // Download PO
+                    poCanvas.toBlob(blob => {
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `PO_OGI_HD_${date}.png`;
+                        link.click();
+                        URL.revokeObjectURL(link.href);
+                    }, 'image/png');
+                    
+                    // Download Invoice after short delay
+                    setTimeout(() => {
+                        invCanvas.toBlob(blob => {
                             const link = document.createElement('a');
                             link.href = URL.createObjectURL(blob);
-                            link.download = `PO_OGI_${date}.png`;
+                            link.download = `Invoice_OGI_HD_${date}.png`;
                             link.click();
+                            URL.revokeObjectURL(link.href);
+                            showStatus('HD images ready! No blank spaces!');
                         }, 'image/png');
-                        
-                        setTimeout(() => {
-                            invCanvas.toBlob(blob => {
-                                const link = document.createElement('a');
-                                link.href = URL.createObjectURL(blob);
-                                link.download = `Invoice_OGI_${date}.png`;
-                                link.click();
-                                showStatus('Done!');
-                            }, 'image/png');
-                        }, 500);
-                    }).catch(() => { if(btn1) btn1.style.visibility='visible'; if(btn2) btn2.style.visibility='visible'; });
-                }).catch(() => { if(btn1) btn1.style.visibility='visible'; if(btn2) btn2.style.visibility='visible'; });
+                    }, 500);
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                    // Restore styles in case of error
+                    po.className = poOriginalClass;
+                    inv.className = invOriginalClass;
+                    if (btn1) btn1.style.visibility = 'visible';
+                    if (btn2) btn2.style.visibility = 'visible';
+                    showStatus('Error creating images');
+                }
             });
         });
         
@@ -1041,7 +1099,7 @@
             const el = document.getElementById('statusMessage');
             el.textContent = msg;
             el.classList.add('show');
-            setTimeout(() => el.classList.remove('show'), 2000);
+            setTimeout(() => el.classList.remove('show'), 3000);
         }
     </script>
 </body>
