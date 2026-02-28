@@ -594,31 +594,12 @@
             text-decoration: underline;
         }
 
-        .invoice-payment-list {
-            list-style: none;
-            margin-left: 0;
-            padding-left: 0;
-        }
-
-        .invoice-payment-list li {
-            margin-bottom: 10px;
-            font-size: 13px;
-            color: #333;
-            line-height: 1.5;
-            display: flex;
-            align-items: baseline;
-        }
-
         .list-number {
             font-weight: bold;
             color: #1e3a5f;
             min-width: 25px;
             margin-right: 8px;
             display: inline-block;
-        }
-
-        .list-text {
-            flex: 1;
         }
 
         .invoice-signature-section {
@@ -798,503 +779,113 @@
     
     <div class="status-message" id="statusMessage">Saved!</div>
 
+    <!-- Purchase Order Container -->
     <div class="container" id="purchaseOrder">
+        <!-- ... PO content (unchanged, same as before) ... -->
         <div class="header">
             <div class="logo-section">
-                <div class="logo editable" data-id="logo-text">
-                    🌿 OGI
-                </div>
+                <div class="logo editable" data-id="logo-text">🌿 OGI</div>
                 <div class="company-info">
-                    <h3 class="editable" data-id="company-name">
-                        Opulence Group Indonesia
-                    </h3>
-                    <p class="editable" data-id="company-address">
-                        <strong>Global Trade & Investment Solutions</strong>
-                    </p>
-                    <p class="editable" data-id="company-details">
-                        Tower Anugrah Floor 16 Office Garden E.3.8,<br>
-                        Mega Kuningan Area,<br>
-                        Dr. Ide Anak Agung Gde Street<br>
-                        +62 831-8271-8126
-                    </p>
+                    <h3 class="editable" data-id="company-name">Opulence Group Indonesia</h3>
+                    <p class="editable" data-id="company-address"><strong>Global Trade & Investment Solutions</strong></p>
+                    <p class="editable" data-id="company-details">Tower Anugrah Floor 16 Office Garden E.3.8,<br>Mega Kuningan Area,<br>Dr. Ide Anak Agung Gde Street<br>+62 831-8271-8126</p>
                 </div>
             </div>
-            
             <div class="po-header">
-                <div class="po-title editable" data-id="po-title">
-                    PURCHASE ORDER
-                </div>
+                <div class="po-title editable" data-id="po-title">PURCHASE ORDER</div>
                 <div class="po-details">
-                    <div class="po-detail-item">
-                        <div class="po-detail-label editable" data-id="po-label">
-                            PO NUMBER
-                        </div>
-                        <div class="po-detail-value editable" data-id="po-number">
-                            OGI001
-                        </div>
-                    </div>
-                    <div class="po-detail-item">
-                        <div class="po-detail-label editable" data-id="date-label">
-                            DATE
-                        </div>
-                        <div class="po-detail-value editable" data-id="po-date">
-                            <span id="currentDate">Loading...</span>
-                        </div>
-                    </div>
+                    <div class="po-detail-item"><div class="po-detail-label editable" data-id="po-label">PO NUMBER</div><div class="po-detail-value editable" data-id="po-number">OGI001</div></div>
+                    <div class="po-detail-item"><div class="po-detail-label editable" data-id="date-label">DATE</div><div class="po-detail-value editable" data-id="po-date"><span id="currentDate">Loading...</span></div></div>
                 </div>
             </div>
         </div>
-        
-        <div class="section-header">
-            <span class="editable" data-id="importer-label">
-                IMPORTER
-            </span>
-            <span class="editable" data-id="exporter-label">
-                EXPORTER
-            </span>
-        </div>
-        
+        <div class="section-header"><span class="editable" data-id="importer-label">IMPORTER</span><span class="editable" data-id="exporter-label">EXPORTER</span></div>
         <div class="importer-exporter">
             <div class="field-group">
-                <div class="field-label editable" data-id="importer-name-label">
-                    Name
-                </div>
-                <div class="field-value editable" data-id="importer-name">
-                    Opulence Group Indonesia
-                </div>
-                
-                <div class="field-label editable" data-id="importer-company-label">
-                    Company Name
-                </div>
-                <div class="field-value editable" data-id="importer-company">
-                    Opulence Group Indonesia
-                </div>
-                
-                <div class="field-label editable" data-id="importer-address-label">
-                    Address
-                </div>
-                <div class="field-value editable" data-id="importer-address">
-                    Tower Anugrah Floor 16 Office Garden E.3.8, Mega Kuningan Area, Dr. Ide Anak Agung Gde Street
-                </div>
-                
-                <div class="field-label editable" data-id="importer-phone-label">
-                    Phone
-                </div>
-                <div class="field-value editable" data-id="importer-phone">
-                    +62 831-8271-8126
-                </div>
-                
-                <div class="field-label editable" data-id="importer-email-label">
-                    Email
-                </div>
-                <div class="field-value editable" data-id="importer-email">
-                    <a href="mailto:purchase.opulencegroupindonesia@yahoo.com" style="color: #0066cc; text-decoration: underline;">purchase.opulencegroupindonesia@yahoo.com</a>
-                </div>
+                <div class="field-label editable" data-id="importer-name-label">Name</div><div class="field-value editable" data-id="importer-name">Opulence Group Indonesia</div>
+                <div class="field-label editable" data-id="importer-company-label">Company Name</div><div class="field-value editable" data-id="importer-company">Opulence Group Indonesia</div>
+                <div class="field-label editable" data-id="importer-address-label">Address</div><div class="field-value editable" data-id="importer-address">Tower Anugrah Floor 16 Office Garden E.3.8, Mega Kuningan Area, Dr. Ide Anak Agung Gde Street</div>
+                <div class="field-label editable" data-id="importer-phone-label">Phone</div><div class="field-value editable" data-id="importer-phone">+62 831-8271-8126</div>
+                <div class="field-label editable" data-id="importer-email-label">Email</div><div class="field-value editable" data-id="importer-email"><a href="mailto:purchase.opulencegroupindonesia@yahoo.com" style="color:#0066cc;text-decoration:underline;">purchase.opulencegroupindonesia@yahoo.com</a></div>
             </div>
-            
             <div class="field-group">
-                <div class="field-label editable" data-id="exporter-name-label">
-                    Name
-                </div>
-                <div class="field-value editable" data-id="exporter-name">
-                    SUVARNA SURESH PATIL
-                </div>
-                
-                <div class="field-label editable" data-id="exporter-company-label">
-                    Company Name
-                </div>
-                <div class="field-value editable" data-id="exporter-company">
-                    SISVI AGRO SOLUTIONS
-                </div>
-                
-                <div class="field-label editable" data-id="exporter-address-label">
-                    Address
-                </div>
-                <div class="field-value editable" data-id="exporter-address">
-                    80 / 626, Govt H Colony, Khokhara, Ahmedabad, Ahmedabad,Gujarat, 380008
-                </div>
-                
-                <div class="field-label editable" data-id="exporter-phone-label">
-                    Phone
-                </div>
-                <div class="field-value editable" data-id="exporter-phone">
-                    9879945911
-                </div>
-                
-                <div class="field-label editable" data-id="exporter-email-label">
-                    Email
-                </div>
-                <div class="field-value editable" data-id="exporter-email">
-                    sisviagro2018@gmail.com
-                </div>
+                <div class="field-label editable" data-id="exporter-name-label">Name</div><div class="field-value editable" data-id="exporter-name">SUVARNA SURESH PATIL</div>
+                <div class="field-label editable" data-id="exporter-company-label">Company Name</div><div class="field-value editable" data-id="exporter-company">SISVI AGRO SOLUTIONS</div>
+                <div class="field-label editable" data-id="exporter-address-label">Address</div><div class="field-value editable" data-id="exporter-address">80 / 626, Govt H Colony, Khokhara, Ahmedabad, Ahmedabad,Gujarat, 380008</div>
+                <div class="field-label editable" data-id="exporter-phone-label">Phone</div><div class="field-value editable" data-id="exporter-phone">9879945911</div>
+                <div class="field-label editable" data-id="exporter-email-label">Email</div><div class="field-value editable" data-id="exporter-email">sisviagro2018@gmail.com</div>
             </div>
         </div>
-        
         <div class="shipping-section">
-            <div class="shipping-item">
-                <div class="shipping-label editable" data-id="shipping-terms-label">
-                    Shipping Terms
-                </div>
-                <div class="shipping-value editable" data-id="shipping-terms">
-                    FOB
-                </div>
-                <div class="shipping-value editable" data-id="shipping-location" style="margin-top: 8px;">
-                    JNPT, (INDIA)
-                </div>
-            </div>
-            <div class="shipping-item">
-                <div class="shipping-label editable" data-id="shipping-method-label">
-                    Shipping Method
-                </div>
-                <div class="shipping-value editable" data-id="shipping-method">
-                    FOR
-                </div>
-            </div>
-            <div class="shipping-item">
-                <div class="shipping-label editable" data-id="delivery-date-label">
-                    Delivery Date
-                </div>
-                <div class="shipping-value editable" data-id="delivery-date">
-                    45 Days
-                </div>
-            </div>
+            <div class="shipping-item"><div class="shipping-label editable" data-id="shipping-terms-label">Shipping Terms</div><div class="shipping-value editable" data-id="shipping-terms">FOB</div><div class="shipping-value editable" data-id="shipping-location" style="margin-top:8px;">JNPT, (INDIA)</div></div>
+            <div class="shipping-item"><div class="shipping-label editable" data-id="shipping-method-label">Shipping Method</div><div class="shipping-value editable" data-id="shipping-method">FOR</div></div>
+            <div class="shipping-item"><div class="shipping-label editable" data-id="delivery-date-label">Delivery Date</div><div class="shipping-value editable" data-id="delivery-date">45 Days</div></div>
         </div>
-        
-        <!-- Product Table -->
-        <table class="product-table" id="productTable">
-            <thead>
-                <tr>
-                    <th style="width: 15%;" class="editable" data-id="product-code-header">
-                        Product Code
-                    </th>
-                    <th style="width: 35%;" class="editable" data-id="product-description-header">
-                        Product Description
-                    </th>
-                    <th style="width: 15%;" class="editable" data-id="quantity-header">
-                        Quantity
-                    </th>
-                    <th style="width: 15%;" class="editable" data-id="unit-header">
-                        Unit
-                    </th>
-                    <th style="width: 20%;" class="editable" data-id="price-header">
-                        Price
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="productTableBody">
-                <tr>
-                    <td class="editable" data-id="product-code-1">
-                        09103030
-                    </td>
-                    <td class="editable" data-id="product-description-1">
-                        Bioplastash
-                    </td>
-                    <td class="editable" data-id="product-quantity-1">
-                        700
-                    </td>
-                    <td class="editable" data-id="product-unit-1">
-                        MT
-                    </td>
-                    <td class="editable" data-id="product-price-1">
-                        $ 250.13 /MT
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="product-code-2">
-                    </td>
-                    <td class="editable" data-id="product-description-2">
-                    </td>
-                    <td class="editable" data-id="product-quantity-2">
-                    </td>
-                    <td class="editable" data-id="product-unit-2">
-                    </td>
-                    <td class="editable" data-id="product-price-2">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="product-code-3">
-                    </td>
-                    <td class="editable" data-id="product-description-3">
-                    </td>
-                    <td class="editable" data-id="product-quantity-3">
-                    </td>
-                    <td class="editable" data-id="product-unit-3">
-                    </td>
-                    <td class="editable" data-id="product-price-3">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="product-code-4">
-                    </td>
-                    <td class="editable" data-id="product-description-4">
-                    </td>
-                    <td class="editable" data-id="product-quantity-4">
-                    </td>
-                    <td class="editable" data-id="product-unit-4">
-                    </td>
-                    <td class="editable" data-id="product-price-4">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="product-code-5">
-                    </td>
-                    <td class="editable" data-id="product-description-5">
-                    </td>
-                    <td class="editable" data-id="product-quantity-5">
-                    </td>
-                    <td class="editable" data-id="product-unit-5">
-                    </td>
-                    <td class="editable" data-id="product-price-5">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="product-code-6">
-                    </td>
-                    <td class="editable" data-id="product-description-6">
-                    </td>
-                    <td class="editable" data-id="product-quantity-6">
-                    </td>
-                    <td class="editable" data-id="product-unit-6">
-                    </td>
-                    <td class="editable" data-id="product-price-6">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <!-- Add Product Button -->
-        <div class="button-container">
-            <button class="add-product-btn" id="addProductBtn">
-                <i class="fas fa-plus-circle"></i> Add New Product
-            </button>
-        </div>
-        
+        <table class="product-table" id="productTable"><thead><tr><th style="width:15%;" class="editable" data-id="product-code-header">Product Code</th><th style="width:35%;" class="editable" data-id="product-description-header">Product Description</th><th style="width:15%;" class="editable" data-id="quantity-header">Quantity</th><th style="width:15%;" class="editable" data-id="unit-header">Unit</th><th style="width:20%;" class="editable" data-id="price-header">Price</th></tr></thead><tbody id="productTableBody"><tr><td class="editable" data-id="product-code-1">09103030</td><td class="editable" data-id="product-description-1">Bioplastash</td><td class="editable" data-id="product-quantity-1">700</td><td class="editable" data-id="product-unit-1">MT</td><td class="editable" data-id="product-price-1">$ 250.13 /MT</td></tr><tr><td class="editable" data-id="product-code-2"></td><td class="editable" data-id="product-description-2"></td><td class="editable" data-id="product-quantity-2"></td><td class="editable" data-id="product-unit-2"></td><td class="editable" data-id="product-price-2"></td></tr><tr><td class="editable" data-id="product-code-3"></td><td class="editable" data-id="product-description-3"></td><td class="editable" data-id="product-quantity-3"></td><td class="editable" data-id="product-unit-3"></td><td class="editable" data-id="product-price-3"></td></tr><tr><td class="editable" data-id="product-code-4"></td><td class="editable" data-id="product-description-4"></td><td class="editable" data-id="product-quantity-4"></td><td class="editable" data-id="product-unit-4"></td><td class="editable" data-id="product-price-4"></td></tr><tr><td class="editable" data-id="product-code-5"></td><td class="editable" data-id="product-description-5"></td><td class="editable" data-id="product-quantity-5"></td><td class="editable" data-id="product-unit-5"></td><td class="editable" data-id="product-price-5"></td></tr><tr><td class="editable" data-id="product-code-6"></td><td class="editable" data-id="product-description-6"></td><td class="editable" data-id="product-quantity-6"></td><td class="editable" data-id="product-unit-6"></td><td class="editable" data-id="product-price-6"></td></tr></tbody></table>
+        <div class="button-container"><button class="add-product-btn" id="addProductBtn"><i class="fas fa-plus-circle"></i> Add New Product</button></div>
         <div class="summary-section">
-            <div class="note-box">
-                <div class="note-label editable" data-id="note-label">
-                    NOTE:
-                </div>
-                <div class="note-text editable" data-id="note-text">
-                    THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>
-                    FALL OF MARKET PRICES FROM DATE OF ISSUE.
-                </div>
-            </div>
-            
-            <table class="summary-table">
-                <tr>
-                    <td class="editable" data-id="subtotal-label">
-                        Subtotal ($)
-                    </td>
-                    <td class="editable" data-id="subtotal-value">
-                        1,75,091.00
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="product-goods-label">
-                        Product (Goods) ($)
-                    </td>
-                    <td class="editable" data-id="product-goods-value">
-                        1,75,091.00
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="tax-label">
-                        Tax ($)
-                    </td>
-                    <td class="editable" data-id="tax-value">
-                        0.00
-                    </td>
-                </tr>
-                <tr>
-                    <td class="editable" data-id="shipping-costs-label">
-                        Shipping costs ($)
-                    </td>
-                    <td class="editable" data-id="shipping-costs-value">
-                        0.00
-                    </td>
-                </tr>
-                <tr class="total-row">
-                    <td class="editable" data-id="total-label">
-                        Total ($)
-                    </td>
-                    <td class="editable" data-id="total-value">
-                        1,75,091.00
-                    </td>
-                </tr>
-            </table>
+            <div class="note-box"><div class="note-label editable" data-id="note-label">NOTE:</div><div class="note-text editable" data-id="note-text">THIS PO IS VALID FOR 15 DAYS DUE TO RISE AND<br>FALL OF MARKET PRICES FROM DATE OF ISSUE.</div></div>
+            <table class="summary-table"><tr><td class="editable" data-id="subtotal-label">Subtotal ($)</td><td class="editable" data-id="subtotal-value">1,75,091.00</td></tr><tr><td class="editable" data-id="product-goods-label">Product (Goods) ($)</td><td class="editable" data-id="product-goods-value">1,75,091.00</td></tr><tr><td class="editable" data-id="tax-label">Tax ($)</td><td class="editable" data-id="tax-value">0.00</td></tr><tr><td class="editable" data-id="shipping-costs-label">Shipping costs ($)</td><td class="editable" data-id="shipping-costs-value">0.00</td></tr><tr class="total-row"><td class="editable" data-id="total-label">Total ($)</td><td class="editable" data-id="total-value">1,75,091.00</td></tr></table>
         </div>
-        
-        <!-- Authorised Signatory Section -->
-        <div class="signature-stamp-container" style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #1e3a5f;">
-            <div class="editable" data-id="signature-image-po" style="display: inline-block; z-index: 2;">
-                <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
-                     alt="Authorized Signature" 
-                     class="signature-image">
-            </div>
-            
-            <div class="editable" data-id="stamp-image-po" style="display: inline-block; z-index: 1; margin-top: -30px;">
-                <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
-                     alt="Company Stamp" 
-                     class="stamp-image">
-            </div>
-            
-            <div class="editable" data-id="signatory-text-po" style="margin-top: 10px; text-align: center;">
-                <div class="authorized-signatory">Aiman Akhtar</div>
-                <div style="font-size: 11px; color: #555; margin-top: 5px;">Authorized Signatory</div>
-                <div style="font-size: 10px; color: #777; margin-top: 2px;">Opulence Group Indonesia</div>
-            </div>
+        <div class="signature-stamp-container" style="margin-top:40px;padding-top:20px;border-top:2px solid #1e3a5f;">
+            <div class="editable" data-id="signature-image-po" style="display:inline-block;z-index:2;"><img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" class="signature-image"></div>
+            <div class="editable" data-id="stamp-image-po" style="display:inline-block;z-index:1;margin-top:-30px;"><img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" class="stamp-image"></div>
+            <div class="editable" data-id="signatory-text-po" style="margin-top:10px;text-align:center;"><div class="authorized-signatory">Aiman Akhtar</div><div style="font-size:11px;color:#555;margin-top:5px;">Authorized Signatory</div><div style="font-size:10px;color:#777;margin-top:2px;">Opulence Group Indonesia</div></div>
         </div>
     </div>
 
+    <!-- Commercial Invoice Container -->
     <div class="invoice-container" id="commercialInvoice">
         <div class="invoice-header">
-            <div class="invoice-logo editable" data-id="invoice-logo">
-                OGI
-            </div>
-            <div class="invoice-title editable" data-id="invoice-title">
-                OPULENCE GROUP INDONESIA
-            </div>
+            <div class="invoice-logo editable" data-id="invoice-logo">OGI</div>
+            <div class="invoice-title editable" data-id="invoice-title">OPULENCE GROUP INDONESIA</div>
         </div>
-
         <div class="invoice-content-wrapper">
-            <div class="invoice-watermark editable" data-id="invoice-watermark">
-                OPULENCE GROUP
-            </div>
-
+            <div class="invoice-watermark editable" data-id="invoice-watermark">OPULENCE GROUP</div>
             <div class="invoice-details-grid" id="invoiceDetailsGrid">
-                <div class="invoice-detail-item editable" data-id="invoice-product">
-                    <span class="invoice-detail-label">Product:</span>
-                    <span class="invoice-detail-value">Bioplastash</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-origin">
-                    <span class="invoice-detail-label">Origin:</span>
-                    <span class="invoice-detail-value">INDIA</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-shipment">
-                    <span class="invoice-detail-label">Shipment:</span>
-                    <span class="invoice-detail-value">FOB JNPT, India</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-quantity">
-                    <span class="invoice-detail-label">Quantity:</span>
-                    <span class="invoice-detail-value">700 MT</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-destination">
-                    <span class="invoice-detail-label">Port of Destination:</span>
-                    <span class="invoice-detail-value">Jakarta, INDONESIA</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-packaging">
-                    <span class="invoice-detail-label">Packaging:</span>
-                    <span class="invoice-detail-value">25kg PP Bag</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-payment">
-                    <span class="invoice-detail-label">Payment:</span>
-                    <span class="invoice-detail-value">90% Advanced, 10% against L/R</span>
-                </div>
-                <div class="invoice-detail-item editable" data-id="invoice-price">
-                    <span class="invoice-detail-label">Price:</span>
-                    <span class="invoice-detail-value">$250.13 /MT</span>
-                </div>
+                <div class="invoice-detail-item editable" data-id="invoice-product"><span class="invoice-detail-label">Product:</span><span class="invoice-detail-value">Bioplastash</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-origin"><span class="invoice-detail-label">Origin:</span><span class="invoice-detail-value">INDIA</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-shipment"><span class="invoice-detail-label">Shipment:</span><span class="invoice-detail-value">FOB JNPT, India</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-quantity"><span class="invoice-detail-label">Quantity:</span><span class="invoice-detail-value">700 MT</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-destination"><span class="invoice-detail-label">Port of Destination:</span><span class="invoice-detail-value">Jakarta, INDONESIA</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-packaging"><span class="invoice-detail-label">Packaging:</span><span class="invoice-detail-value">25kg PP Bag</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-payment"><span class="invoice-detail-label">Payment:</span><span class="invoice-detail-value">90% Advanced, 10% against L/R</span></div>
+                <div class="invoice-detail-item editable" data-id="invoice-price"><span class="invoice-detail-label">Price:</span><span class="invoice-detail-value">$250.13 /MT</span></div>
             </div>
-            
-            <!-- Add New Button for Invoice Details -->
-            <div class="invoice-button-container">
-                <button class="add-invoice-btn" id="addInvoiceDetailBtn">
-                    <i class="fas fa-plus-circle"></i> Add New
-                </button>
-            </div>
-
+            <div class="invoice-button-container"><button class="add-invoice-btn" id="addInvoiceDetailBtn"><i class="fas fa-plus-circle"></i> Add New</button></div>
             <div class="invoice-terms-section">
-                <div class="invoice-terms-title editable" data-id="invoice-terms-title">
-                    Importer Terms & Condition
-                </div>
+                <div class="invoice-terms-title editable" data-id="invoice-terms-title">Importer Terms & Condition</div>
                 <ul class="invoice-terms-list" id="termsList">
-                    <li class="editable" data-id="invoice-term-1">
-                        <span class="list-number editable" data-id="invoice-term-1-number">1.</span>
-                        <span class="list-text">Seller will be paying all the logistic charges from warehouse to Port.</span>
-                    </li>
-                    <li class="editable" data-id="invoice-term-2">
-                        <span class="list-number editable" data-id="invoice-term-2-number">2.</span>
-                        <span class="list-text">Seller should be experienced in this commodity</span>
-                    </li>
-                    <li class="editable" data-id="invoice-term-3">
-                        <span class="list-number editable" data-id="invoice-term-3-number">3.</span>
-                        <span class="list-text">Seller should be BPOM or US FDA registered as well as their country's registration for export.</span>
-                    </li>
-                    <li class="editable" data-id="invoice-term-4">
-                        <span class="list-number editable" data-id="invoice-term-4-number">4.</span>
-                        <span class="list-text">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</span>
-                    </li>
-                    <li class="editable" data-id="invoice-term-5">
-                        <span class="list-number editable" data-id="invoice-term-5-number">5.</span>
-                        <span class="list-text">Partially shipment allowed but not more than 3.</span>
-                    </li>
-                    <li class="editable" data-id="invoice-term-6">
-                        <span class="list-number editable" data-id="invoice-term-6-number">6.</span>
-                        <span class="list-text">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</span>
-                    </li>
+                    <li class="editable" data-id="invoice-term-1"><span class="list-number editable" data-id="invoice-term-1-number">1.</span><span class="list-text">Seller will be paying all the logistic charges from warehouse to Port.</span></li>
+                    <li class="editable" data-id="invoice-term-2"><span class="list-number editable" data-id="invoice-term-2-number">2.</span><span class="list-text">Seller should be experienced in this commodity</span></li>
+                    <li class="editable" data-id="invoice-term-3"><span class="list-number editable" data-id="invoice-term-3-number">3.</span><span class="list-text">Seller should be BPOM or US FDA registered as well as their country's registration for export.</span></li>
+                    <li class="editable" data-id="invoice-term-4"><span class="list-number editable" data-id="invoice-term-4-number">4.</span><span class="list-text">Seller will be delivered all goods as asking time period (40 days from the date of issuing this letter).</span></li>
+                    <li class="editable" data-id="invoice-term-5"><span class="list-number editable" data-id="invoice-term-5-number">5.</span><span class="list-text">Partially shipment allowed but not more than 3.</span></li>
+                    <li class="editable" data-id="invoice-term-6"><span class="list-number editable" data-id="invoice-term-6-number">6.</span><span class="list-text">As per all terms and conditions between you and us We will not take our step back after getting the certifications.</span></li>
                 </ul>
             </div>
-
-            <!-- New Payment Terms Section (Old one removed) -->
             <div class="invoice-payment-section">
-                <div class="invoice-payment-title editable" data-id="invoice-payment-title">
-                    TERMS OF PAYMENT
-                </div>
-                <div class="invoice-payment-content" style="margin-top: 15px;">
-                    <div class="editable" data-id="invoice-payment-advance" style="margin-bottom: 15px;">
-                        <strong>Advance Payment</strong><br>
-                        An advance payment of fifty percent (50%) of the total order value shall be released by the Buyer immediately upon acceptance of the Purchase Order (PO) to secure the order and reserve production capacity.
-                    </div>
-                    <div class="editable" data-id="invoice-payment-production" style="margin-bottom: 15px;">
-                        <strong>Commencement of Production</strong><br>
-                        Production shall commence strictly upon receipt of the aforesaid advance payment. All goods shall be freshly manufactured exclusively for this order.
-                    </div>
-                    <div class="editable" data-id="invoice-payment-balance" style="margin-bottom: 15px;">
-                        <strong>Balance Payment</strong><br>
-                        The remaining fifty percent (50%) of the total order value shall be payable by the Buyer against receipt of scanned copies of the Bill of Lading (BL) and/or relevant shipping documents.
-                    </div>
-                    <div class="editable" data-id="invoice-payment-obligation" style="margin-bottom: 15px;">
-                        <strong>Payment Obligation</strong><br>
-                        The Buyer undertakes and agrees to make all payments in a timely manner in accordance with these terms, ensuring smooth execution of the order and continuity of business between the parties.
-                    </div>
-                    <div class="editable" data-id="invoice-payment-future">
-                        <strong>Future Business</strong><br>
-                        Subject to successful execution of this shipment and compliance with the above payment terms, repeat orders and increased order volumes may be mutually considered.
-                    </div>
+                <div class="invoice-payment-title editable" data-id="invoice-payment-title">TERMS OF PAYMENT</div>
+                <div class="invoice-payment-content" style="margin-top:15px;">
+                    <div class="editable" data-id="invoice-payment-advance" style="margin-bottom:15px;"><strong>Advance Payment</strong><br>An advance payment of fifty percent (50%) of the total order value shall be released by the Buyer immediately upon acceptance of the Purchase Order (PO) to secure the order and reserve production capacity.</div>
+                    <div class="editable" data-id="invoice-payment-production" style="margin-bottom:15px;"><strong>Commencement of Production</strong><br>Production shall commence strictly upon receipt of the aforesaid advance payment. All goods shall be freshly manufactured exclusively for this order.</div>
+                    <div class="editable" data-id="invoice-payment-balance" style="margin-bottom:15px;"><strong>Balance Payment</strong><br>The remaining fifty percent (50%) of the total order value shall be payable by the Buyer against receipt of scanned copies of the Bill of Lading (BL) and/or relevant shipping documents.</div>
+                    <div class="editable" data-id="invoice-payment-obligation" style="margin-bottom:15px;"><strong>Payment Obligation</strong><br>The Buyer undertakes and agrees to make all payments in a timely manner in accordance with these terms, ensuring smooth execution of the order and continuity of business between the parties.</div>
+                    <div class="editable" data-id="invoice-payment-future"><strong>Future Business</strong><br>Subject to successful execution of this shipment and compliance with the above payment terms, repeat orders and increased order volumes may be mutually considered.</div>
                 </div>
             </div>
-
             <div class="invoice-signature-section">
                 <div class="invoice-signature-box">
-                    <div class="editable" data-id="signature-image-invoice" style="text-align: center; margin-bottom: -25px; z-index: 2;">
-                        <img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" 
-                             alt="Authorized Signature" 
-                             style="width: 150px; height: auto; filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));">
-                    </div>
-                    
-                    <div class="editable" data-id="stamp-image-invoice" style="text-align: center; z-index: 1;">
-                        <img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" 
-                             alt="Company Stamp" 
-                             style="width: 180px; height: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2)); margin-top: -30px;">
-                    </div>
-                    
-                    <div class="invoice-signature-line" style="margin-top: 10px;"></div>
-                    <div class="invoice-signature-text editable" data-id="invoice-signature-text">
-                        Aiman Akhtar
-                    </div>
-                    <div class="invoice-authorized editable" data-id="invoice-authorized">
-                        Authorised Signatory
-                    </div>
-                    <div style="font-size: 11px; color: #777; margin-top: 5px;">
-                        Opulence Group Indonesia
-                    </div>
+                    <div class="editable" data-id="signature-image-invoice" style="text-align:center;margin-bottom:-25px;z-index:2;"><img src="https://araldomqfedor-blip.github.io/orderwala/sing.png" alt="Authorized Signature" style="width:150px;height:auto;filter:drop-shadow(1px 1px 2px rgba(0,0,0,0.1));"></div>
+                    <div class="editable" data-id="stamp-image-invoice" style="text-align:center;z-index:1;"><img src="https://araldomqfedor-blip.github.io/orderwala/steamp.png" alt="Company Stamp" style="width:180px;height:auto;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.2));margin-top:-30px;"></div>
+                    <div class="invoice-signature-line" style="margin-top:10px;"></div>
+                    <div class="invoice-signature-text editable" data-id="invoice-signature-text">Aiman Akhtar</div>
+                    <div class="invoice-authorized editable" data-id="invoice-authorized">Authorised Signatory</div>
+                    <div style="font-size:11px;color:#777;margin-top:5px;">Opulence Group Indonesia</div>
                 </div>
             </div>
         </div>
-
-        <div class="invoice-footer editable" data-id="invoice-footer">
-            <p>&copy; 2024 Opulence Group Indonesia. All rights reserved. | Commercial Invoice</p>
-        </div>
+        <div class="invoice-footer editable" data-id="invoice-footer"><p>&copy; 2024 Opulence Group Indonesia. All rights reserved. | Commercial Invoice</p></div>
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -1311,64 +902,35 @@
             setupAddInvoiceDetailButton();
         });
         
-        // Track product row count
         let productRowCount = 6;
-        
-        // Track invoice detail count
         let invoiceDetailCount = 8;
         
         function setupAddProductButton() {
-            const addBtn = document.getElementById('addProductBtn');
-            if (addBtn) {
-                addBtn.addEventListener('click', function() {
-                    addNewProductRow();
-                });
-            }
+            document.getElementById('addProductBtn')?.addEventListener('click', addNewProductRow);
         }
         
         function setupAddInvoiceDetailButton() {
-            const addBtn = document.getElementById('addInvoiceDetailBtn');
-            if (addBtn) {
-                addBtn.addEventListener('click', function() {
-                    addNewInvoiceDetail();
-                });
-            }
+            document.getElementById('addInvoiceDetailBtn')?.addEventListener('click', addNewInvoiceDetail);
         }
         
         function addNewInvoiceDetail() {
             invoiceDetailCount++;
             const grid = document.getElementById('invoiceDetailsGrid');
-            
-            // Create new detail item
             const newItem = document.createElement('div');
             newItem.className = 'invoice-detail-item editable';
             newItem.setAttribute('data-id', `invoice-detail-${invoiceDetailCount}`);
-            
-            // Random label
             const labels = ['Custom Label:', 'Additional Info:', 'Reference:', 'Notes:', 'Special:'];
             const randomLabel = labels[Math.floor(Math.random() * labels.length)];
-            
-            newItem.innerHTML = `
-                <span class="invoice-detail-label editable" data-id="invoice-detail-label-${invoiceDetailCount}">${randomLabel}</span>
-                <span class="invoice-detail-value editable" data-id="invoice-detail-value-${invoiceDetailCount}">New Detail</span>
-            `;
-            
+            newItem.innerHTML = `<span class="invoice-detail-label editable" data-id="invoice-detail-label-${invoiceDetailCount}">${randomLabel}</span><span class="invoice-detail-value editable" data-id="invoice-detail-value-${invoiceDetailCount}">New Detail</span>`;
             grid.appendChild(newItem);
-            
-            // Make new item editable
             attachEditableListenersToElement(newItem);
-            
             showStatus('New detail added!');
         }
         
         function addNewProductRow() {
             productRowCount++;
             const tbody = document.getElementById('productTableBody');
-            
-            // Create new row
             const newRow = document.createElement('tr');
-            
-            // Create cells
             const cells = [
                 { type: 'td', className: 'editable', dataId: `product-code-${productRowCount}`, content: '' },
                 { type: 'td', className: 'editable', dataId: `product-description-${productRowCount}`, content: '' },
@@ -1376,7 +938,6 @@
                 { type: 'td', className: 'editable', dataId: `product-unit-${productRowCount}`, content: '' },
                 { type: 'td', className: 'editable', dataId: `product-price-${productRowCount}`, content: '' }
             ];
-            
             cells.forEach(cell => {
                 const td = document.createElement(cell.type);
                 td.className = cell.className;
@@ -1384,234 +945,129 @@
                 td.textContent = cell.content;
                 newRow.appendChild(td);
             });
-            
             tbody.appendChild(newRow);
-            
-            // Attach editable listeners
             attachEditableListenersToElement(newRow);
-            
             showStatus('New product row added!');
         }
         
         function attachEditableListenersToElement(element) {
-            const editableElements = element.querySelectorAll('.editable');
-            editableElements.forEach(el => {
+            element.querySelectorAll('.editable').forEach(el => {
                 el.dataset.original = el.innerHTML;
-                
                 el.removeEventListener('click', startDirectEditingHandler);
                 el.addEventListener('click', startDirectEditingHandler);
             });
         }
         
-        // Handler function
-        function startDirectEditingHandler(e) {
-            e.stopPropagation();
-            startDirectEditing(this);
-        }
+        function startDirectEditingHandler(e) { e.stopPropagation(); startDirectEditing(this); }
         
         function setupDirectEditor() {
-            const editableElements = document.querySelectorAll('.editable');
-            
-            editableElements.forEach(element => {
+            document.querySelectorAll('.editable').forEach(element => {
                 element.dataset.original = element.innerHTML;
-                
-                element.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    startDirectEditing(this);
-                });
+                element.addEventListener('click', function(e) { e.stopPropagation(); startDirectEditing(this); });
             });
-            
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.editable')) {
-                    const editingElement = document.querySelector('.editing');
-                    if (editingElement) {
-                        saveDirectEdit(editingElement);
-                    }
-                }
-            });
-            
-            document.addEventListener('keydown', function(e) {
-                const editingElement = document.querySelector('.editing');
-                if (editingElement) {
-                    if (e.key === 'Enter' && !e.shiftKey && !e.target.matches('textarea')) {
-                        e.preventDefault();
-                        saveDirectEdit(editingElement);
-                    }
-                    if (e.key === 'Escape') {
-                        e.preventDefault();
-                        cancelDirectEdit(editingElement);
-                    }
-                }
+            document.addEventListener('click', e => { if (!e.target.closest('.editable')) { const el = document.querySelector('.editing'); if (el) saveDirectEdit(el); } });
+            document.addEventListener('keydown', e => {
+                const el = document.querySelector('.editing');
+                if (!el) return;
+                if (e.key === 'Enter' && !e.shiftKey && !e.target.matches('textarea')) { e.preventDefault(); saveDirectEdit(el); }
+                if (e.key === 'Escape') { e.preventDefault(); cancelDirectEdit(el); }
             });
         }
         
         function startDirectEditing(element) {
-            const currentEditing = document.querySelector('.editing');
-            if (currentEditing && currentEditing !== element) {
-                saveDirectEdit(currentEditing);
-            }
-            
+            const current = document.querySelector('.editing');
+            if (current && current !== element) saveDirectEdit(current);
             element.classList.add('editing');
-            
             let content = '';
             if (element.tagName === 'A' || element.querySelector('a')) {
                 const link = element.tagName === 'A' ? element : element.querySelector('a');
                 content = link.textContent;
                 element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
-            } else if (element.classList.contains('note-text') || 
-                      element.classList.contains('company-details') ||
-                      element.classList.contains('invoice-detail-value') ||
-                      (element.classList.contains('field-value') && element.textContent.length > 50) ||
-                      element.querySelector('strong')) {  // Handle payment terms with bold tags
+            } else if (element.classList.contains('note-text') || element.classList.contains('company-details') || element.classList.contains('invoice-detail-value') || (element.classList.contains('field-value') && element.textContent.length > 50) || element.querySelector('strong')) {
                 content = element.textContent;
                 element.innerHTML = `<textarea class="edit-textarea">${content}</textarea>`;
-                
                 const textarea = element.querySelector('.edit-textarea');
                 textarea.style.height = Math.max(80, textarea.scrollHeight) + 'px';
-                
-                textarea.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = Math.max(80, this.scrollHeight) + 'px';
-                });
+                textarea.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.max(80, this.scrollHeight) + 'px'; });
             } else {
                 content = element.textContent;
                 element.innerHTML = `<input type="text" class="edit-input" value="${content}">`;
             }
-            
             const input = element.querySelector('.edit-input, .edit-textarea');
-            if (input) {
-                input.focus();
-                input.select();
-                
-                input.addEventListener('blur', function() {
-                    saveDirectEdit(element);
-                });
-            }
+            if (input) { input.focus(); input.select(); input.addEventListener('blur', () => saveDirectEdit(element)); }
         }
         
         function saveDirectEdit(element) {
             const input = element.querySelector('.edit-input, .edit-textarea');
             if (!input) return;
-            
             let newValue = input.value.trim();
-            
             if (input.matches('textarea')) {
-                // Check if it contains bold markers (for payment terms)
-                if (newValue.includes('Advance Payment') || newValue.includes('Commencement') || newValue.includes('Balance')) {
-                    // Try to preserve basic formatting by converting line breaks to <br>
-                    const displayValue = newValue.replace(/\n/g, '<br>');
-                    element.innerHTML = displayValue;
-                } else {
-                    const displayValue = newValue.replace(/\n/g, '<br>');
-                    element.innerHTML = displayValue;
-                }
-            } 
-            else if (element.dataset.id === 'importer-email' || element.dataset.id === 'exporter-email') {
-                if (element.dataset.id === 'importer-email') {
-                    element.innerHTML = `<a href="mailto:${newValue}" style="color: #0066cc; text-decoration: underline;">${newValue}</a>`;
-                } else {
-                    element.innerHTML = newValue;
-                }
-            } 
-            else {
+                element.innerHTML = newValue.replace(/\n/g, '<br>');
+            } else if (element.dataset.id === 'importer-email') {
+                element.innerHTML = `<a href="mailto:${newValue}" style="color:#0066cc;text-decoration:underline;">${newValue}</a>`;
+            } else if (element.dataset.id === 'exporter-email') {
+                element.innerHTML = newValue;
+            } else {
                 element.textContent = newValue;
             }
-            
             element.classList.remove('editing');
-            showStatus('Saved!');
-            
             element.dataset.original = element.innerHTML;
+            showStatus('Saved!');
         }
         
-        function cancelDirectEdit(element) {
-            element.innerHTML = element.dataset.original || '';
-            element.classList.remove('editing');
-        }
+        function cancelDirectEdit(element) { element.innerHTML = element.dataset.original || ''; element.classList.remove('editing'); }
         
         function setupButtons() {
-            document.getElementById('printBtn').addEventListener('click', function() {
-                window.print();
-            });
-            
-            document.getElementById('downloadBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                downloadAllAsImages();
-            });
+            document.getElementById('printBtn').addEventListener('click', () => window.print());
+            document.getElementById('downloadBtn').addEventListener('click', (e) => { e.preventDefault(); downloadAllAsImages(); });
         }
         
         function downloadAllAsImages() {
-            showStatus('Creating images...');
+            showStatus('Creating high‑res images...');
+            const po = document.getElementById('purchaseOrder');
+            const inv = document.getElementById('commercialInvoice');
+            const addBtn = document.querySelector('.button-container');
+            const invBtn = document.querySelector('.invoice-button-container');
+            if (addBtn) addBtn.style.visibility = 'hidden';
+            if (invBtn) invBtn.style.visibility = 'hidden';
             
-            const poElement = document.getElementById('purchaseOrder');
-            const invoiceElement = document.getElementById('commercialInvoice');
+            // HIGH QUALITY SETTINGS
+            const scale = 4;          // 4x scaling for crystal clear text
+            const dpi = 300;           // print quality
             
-            // Temporarily hide buttons for screenshot
-            const addProductBtn = document.querySelector('.button-container');
-            const addInvoiceBtn = document.querySelector('.invoice-button-container');
+            html2canvas(po, { scale: scale, useCORS: true, logging: false, backgroundColor: '#ffffff', allowTaint: true, imageTimeout: 0, removeContainer: true }).then(poCanvas => {
+                html2canvas(inv, { scale: scale, useCORS: true, logging: false, backgroundColor: '#ffffff', allowTaint: true, imageTimeout: 0, removeContainer: true }).then(invCanvas => {
+        if (addBtn) addBtn.style.visibility = 'visible';
+        if (invBtn) invBtn.style.visibility = 'visible';
+        
+        function downloadCanvas(canvas, filename) {
+            // Create a temporary link with the canvas as an image
+            const link = document.createElement('a');
+            link.download = filename;
             
-            if (addProductBtn) addProductBtn.style.visibility = 'hidden';
-            if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'hidden';
-            
-            html2canvas(poElement, {
-                scale: 2,
-                useCORS: true,
-                logging: false,
-                backgroundColor: '#ffffff',
-                allowTaint: true
-            }).then(poCanvas => {
-                html2canvas(invoiceElement, {
-                    scale: 2,
-                    useCORS: true,
-                    logging: false,
-                    backgroundColor: '#ffffff',
-                    allowTaint: true
-                }).then(invoiceCanvas => {
-                    // Show buttons back
-                    if (addProductBtn) addProductBtn.style.visibility = 'visible';
-                    if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
-                    
-                    const poImage = poCanvas.toDataURL('image/png');
-                    const invoiceImage = invoiceCanvas.toDataURL('image/png');
-                    
-                    const poLink = document.createElement('a');
-                    const date = new Date().toISOString().split('T')[0];
-                    poLink.download = `Purchase_Order_OGI_${date}.png`;
-                    poLink.href = poImage;
-                    poLink.click();
-                    
-                    setTimeout(() => {
-                        const invoiceLink = document.createElement('a');
-                        invoiceLink.download = `Commercial_Invoice_OGI_${date}.png`;
-                        invoiceLink.href = invoiceImage;
-                        invoiceLink.click();
-                        
-                        showStatus('Both images downloaded!');
-                    }, 500);
-                    
-                }).catch(error => {
-                    // Show buttons back in case of error
-                    if (addProductBtn) addProductBtn.style.visibility = 'visible';
-                    if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
-                    console.error('Error creating invoice image:', error);
-                    showStatus('Error creating images');
-                });
-            }).catch(error => {
-                // Show buttons back in case of error
-                if (addProductBtn) addProductBtn.style.visibility = 'visible';
-                if (addInvoiceBtn) addInvoiceBtn.style.visibility = 'visible';
-                console.error('Error creating PO image:', error);
-                showStatus('Error creating images');
-            });
+            // Convert canvas to blob for maximum quality (PNG is lossless)
+            canvas.toBlob(blob => {
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                URL.revokeObjectURL(link.href);
+            }, 'image/png');
         }
         
-        function showStatus(message) {
-            const statusEl = document.getElementById('statusMessage');
-            statusEl.textContent = message;
-            statusEl.classList.add('show');
-            
-            setTimeout(() => {
-                statusEl.classList.remove('show');
-            }, 3000);
+        const date = new Date().toISOString().split('T')[0];
+        downloadCanvas(poCanvas, `Purchase_Order_OGI_${date}.png`);
+        setTimeout(() => {
+            downloadCanvas(invCanvas, `Commercial_Invoice_OGI_${date}.png`);
+            showStatus('High‑quality images ready!');
+        }, 500);
+                }).catch(err => { if (addBtn) addBtn.style.visibility = 'visible'; if (invBtn) invBtn.style.visibility = 'visible'; console.error(err); showStatus('Error creating invoice image'); });
+            }).catch(err => { if (addBtn) addBtn.style.visibility = 'visible'; if (invBtn) invBtn.style.visibility = 'visible'; console.error(err); showStatus('Error creating PO image'); });
+        }
+        
+        function showStatus(msg) {
+            const el = document.getElementById('statusMessage');
+            el.textContent = msg;
+            el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), 3000);
         }
     </script>
 </body>
