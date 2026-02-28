@@ -1235,32 +1235,33 @@
                 </ul>
             </div>
 
+            <!-- New Payment Terms Section (Old one removed) -->
             <div class="invoice-payment-section">
                 <div class="invoice-payment-title editable" data-id="invoice-payment-title">
-                    Terms of Payment
+                    TERMS OF PAYMENT
                 </div>
-                <ul class="invoice-payment-list" id="paymentList">
-                    <li class="editable" data-id="invoice-payment-1">
-                        <span class="list-number editable" data-id="invoice-payment-1-number">1.</span>
-                        <span class="list-text">After getting certification we will take approval for payment</span>
-                    </li>
-                    <li class="editable" data-id="invoice-payment-2">
-                        <span class="list-number editable" data-id="invoice-payment-2-number">2.</span>
-                        <span class="list-text">90% advanced 10% against L/R.</span>
-                    </li>
-                    <li class="editable" data-id="invoice-payment-3">
-                        <span class="list-number editable" data-id="invoice-payment-3-number">3.</span>
-                        <span class="list-text">After 90% amount 10% amount will be pay at the time of loading.</span>
-                    </li>
-                    <li class="editable" data-id="invoice-payment-4">
-                        <span class="list-number editable" data-id="invoice-payment-4-number">4.</span>
-                        <span class="list-text">90% amount will be transferred according to your sending goods to Port.</span>
-                    </li>
-                    <li class="editable" data-id="invoice-payment-5">
-                        <span class="list-number editable" data-id="invoice-payment-5-number">5.</span>
-                        <span class="list-text">After making advanced, you have to deliver our goods within 40 days.</span>
-                    </li>
-                </ul>
+                <div class="invoice-payment-content" style="margin-top: 15px;">
+                    <div class="editable" data-id="invoice-payment-advance" style="margin-bottom: 15px;">
+                        <strong>Advance Payment</strong><br>
+                        An advance payment of fifty percent (50%) of the total order value shall be released by the Buyer immediately upon acceptance of the Purchase Order (PO) to secure the order and reserve production capacity.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-production" style="margin-bottom: 15px;">
+                        <strong>Commencement of Production</strong><br>
+                        Production shall commence strictly upon receipt of the aforesaid advance payment. All goods shall be freshly manufactured exclusively for this order.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-balance" style="margin-bottom: 15px;">
+                        <strong>Balance Payment</strong><br>
+                        The remaining fifty percent (50%) of the total order value shall be payable by the Buyer against receipt of scanned copies of the Bill of Lading (BL) and/or relevant shipping documents.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-obligation" style="margin-bottom: 15px;">
+                        <strong>Payment Obligation</strong><br>
+                        The Buyer undertakes and agrees to make all payments in a timely manner in accordance with these terms, ensuring smooth execution of the order and continuity of business between the parties.
+                    </div>
+                    <div class="editable" data-id="invoice-payment-future">
+                        <strong>Future Business</strong><br>
+                        Subject to successful execution of this shipment and compliance with the above payment terms, repeat orders and increased order volumes may be mutually considered.
+                    </div>
+                </div>
             </div>
 
             <div class="invoice-signature-section">
@@ -1460,7 +1461,8 @@
             } else if (element.classList.contains('note-text') || 
                       element.classList.contains('company-details') ||
                       element.classList.contains('invoice-detail-value') ||
-                      (element.classList.contains('field-value') && element.textContent.length > 50)) {
+                      (element.classList.contains('field-value') && element.textContent.length > 50) ||
+                      element.querySelector('strong')) {  // Handle payment terms with bold tags
                 content = element.textContent;
                 element.innerHTML = `<textarea class="edit-textarea">${content}</textarea>`;
                 
@@ -1494,8 +1496,15 @@
             let newValue = input.value.trim();
             
             if (input.matches('textarea')) {
-                const displayValue = newValue.replace(/\n/g, '<br>');
-                element.innerHTML = displayValue;
+                // Check if it contains bold markers (for payment terms)
+                if (newValue.includes('Advance Payment') || newValue.includes('Commencement') || newValue.includes('Balance')) {
+                    // Try to preserve basic formatting by converting line breaks to <br>
+                    const displayValue = newValue.replace(/\n/g, '<br>');
+                    element.innerHTML = displayValue;
+                } else {
+                    const displayValue = newValue.replace(/\n/g, '<br>');
+                    element.innerHTML = displayValue;
+                }
             } 
             else if (element.dataset.id === 'importer-email' || element.dataset.id === 'exporter-email') {
                 if (element.dataset.id === 'importer-email') {
